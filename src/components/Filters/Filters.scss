@@ -1,0 +1,14 @@
+.s-filters {
+  height: 56vh !important;
+}
+.s-input {
+  font-size: 130%;
+}
+.s-fade-enter-active,
+.s-fade-leave-active {
+  transition: opacity .5s;
+}
+.s-fade-enter,
+.s-fade-leave-to {
+  opacity: 0;
+}
