@@ -1,19 +1,11 @@
 <template>
-
-  <q-layout view="hHh LpR Lfr"
-            class="bg-white s-filters"
-            container>
-    <q-header class="bg-secondary">
-      <q-toolbar>
-        <q-toolbar-title>
+  <div ref="rootElement">
+      <div class="bg-secondary text-white q-px-md q-py-sm text-h6">
           Filtrer les produits
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-header>
-    <q-page-container>
-      <q-page class="q-pa-md">
+      </div>
+      <div class="q-px-md q-pt-md">
         <div>
-          <q-input class="s-input q-my-md"
+          <q-input class="s-input q-my-xs"
                    color="accent"
                    size="md"
                    outlined
@@ -41,29 +33,13 @@
                     color="accent">
             <span class="text-subtitle1">Proche de la rupture</span>
           </q-toggle>
-        </div>
-        <div>
           <q-toggle v-model="os"
                     color="accent">
             <span class="text-subtitle1">En rupture</span>
           </q-toggle>
         </div>
-        <q-separator class="q-my-lg" />
-        <q-btn class="bg-secondary text-white"
-               :disabled="!isReset"
-               @click="reset"
-               flat>
-          Réinitialiser
-        </q-btn>
-        <div v-if="isReset"
-             class="q-my-lg q-pa-md rounded-borders text-center"
-             style="background-color: #EEE">
-          <span v-if="productsLength">Nous avons trouvé <strong class="text-secondary">{{ productsLength }}</strong> produit{{ productsLength > 1 ? 's' : '' }}</span>
-          <span v-else>Aucun produit trouvé</span>
-        </div>
-      </q-page>
-    </q-page-container>
-  </q-layout>
+      </div>
+  </div>
 
 </template>
 <style lang="scss" scoped>@import './Filters';</style>

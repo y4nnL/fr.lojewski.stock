@@ -7,7 +7,7 @@ import {
   PRODUCT_LIST,
   PRODUCT_TERM,
   PRODUCT_TYPE,
-  PRODUCT_TYPES
+  PRODUCT_TYPES, PRODUCT_SHOW_FILTERS
 } from './constants';
 
 const types = Object.values(PRODUCT_TYPES);
@@ -29,6 +29,9 @@ export default {
   },
   [PRODUCT_LIST]: (state, list) => {
     state.list = list;
+  },
+  [PRODUCT_SHOW_FILTERS]: (state, showFilters) => {
+    state.showFilters = !!showFilters;
   },
   [PRODUCT_INCREMENT]: (state, { productId, unitIndex }) => {
     let product = state.list.find((product) => product.id === productId);

@@ -8,7 +8,8 @@ import {
   PRODUCT_ALERT,
   PRODUCT_INCREMENT,
   PRODUCT_DECREMENT,
-  PRODUCT_QUANTITY
+  PRODUCT_QUANTITY, PRODUCT_TOGGLE_FILTERS,
+  PRODUCT_SHOW_FILTERS
 } from 'src/store/product/constants';
 import { commitSaveProductUnit, productCollection } from 'src/store/product/helpers';
 
@@ -56,6 +57,9 @@ export default {
       productId,
       unitIndex
     });
+  },
+  [PRODUCT_TOGGLE_FILTERS]({ commit }) {
+    commit(PRODUCT_SHOW_FILTERS, !this.state.product.showFilters);
   },
   [PRODUCT_RESET_FILTERS]({ commit }) {
     commit(PRODUCT_TERM, '');

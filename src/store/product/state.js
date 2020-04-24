@@ -4,6 +4,7 @@ export default function () {
     type: '',
     alert: false,
     os: false,
-    list: []
+    list: [],
+    showFilters: false
   }
 }

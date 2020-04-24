@@ -4,13 +4,33 @@ import {
   PRODUCT_MUTATION_TERM,
   PRODUCT_DISPATCH_RESET_FILTERS, PRODUCT_GETTER_FILTERED_LIST
 } from '../../store/product/constants';
+import { PRODUCT_NS } from 'src/store/product/constants';
 
 export default {
-  name: 'SFilters',
+  name: 'Filters',
+  mounted() {
+    window.addEventListener('deviceorientation', this.emitHeight, true);
+    this.emitHeight();
+  },
+  destroy() {
+    window.removeEventListener('deviceorientation', this.emitHeight, true);
+  },
   methods: {
     reset() {
       this.$store.dispatch(PRODUCT_DISPATCH_RESET_FILTERS);
     },
+    emitHeight() {
+      let height = this.$refs.rootElement.style.height;
+      this.$refs.rootElement.style.height = 'auto';
+      this.$emit('height', this.$refs.rootElement.clientHeight);
+      this.$refs.rootElement.style.height = height;
+    }
+  },
+  props: {
+    namespace: {
+      type: String,
+      default: PRODUCT_NS
+    }
   },
   computed: {
     term: {

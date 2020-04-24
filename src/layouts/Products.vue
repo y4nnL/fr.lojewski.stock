@@ -10,7 +10,7 @@
         </q-toolbar-title>
         <q-btn dense flat round
                icon="sort"
-               @click="filters = !filters">
+               @click="toggleFilters">
           <q-badge v-if="filtersCount"
                    color="red"
                    class="vertical-bottom"
@@ -49,13 +49,14 @@
                      :key="to"/>
       </q-tabs>
     </q-header>
-    <q-page-container>
+    <s-filters :namespace="productNs"
+               class="fixed s-filters"
+               @height="filtersHeight = $event"
+               :style="{ height: showFilters ? filtersHeight + 'px' : 0 }"/>
+    <q-page-container class="fixed s-container"
+                      :style="{ top: (showFilters ? 98 + filtersHeight: 98) + 'px' }">
       <router-view/>
     </q-page-container>
-    <q-dialog v-model="filters"
-              position="bottom">
-      <s-filters />
-    </q-dialog>
     <q-dialog v-model="settings"
               position="bottom">
       <s-settings />
@@ -63,13 +64,35 @@
   </q-layout>
 
 </template>
+<style scoped>
+  .s-container,
+  .s-filters {
+    top: 98px;
+    left: 0;
+    right: 0;
+  }
+  .s-container {
+    transition: top .3s ease-out;
+    bottom: 0;
+    padding: 0 !important;
+    overflow: auto;
+  }
+  .s-filters {
+    transition: height .3s ease-out;
+    overflow: hidden;
+  }
+  .s-container > main {
+    min-height: auto !important;
+  }
+</style>
 <script>
 
-  import SFilters from '../components/Filters/Filters.vue';
   import SSettings from '../components/Settings/Settings.vue';
+  import SFilters from '../components/Filters/Filters.vue';
   import { mapState } from 'vuex';
   import {
-    PRODUCT_GETTER_FILTERS,
+    PRODUCT_DISPATCH_TOGGLE_FILTERS,
+    PRODUCT_GETTER_FILTERS, PRODUCT_NS, PRODUCT_SHOW_FILTERS,
     PRODUCT_TYPES
   } from '../store/product/constants';
   import {
@@ -91,27 +114,35 @@
   export default {
     name: 'Main',
     components: {
-      SFilters,
-      SSettings
+      SSettings,
+      SFilters
     },
     data() {
       return {
+        filtersHeight: 0,
         account: false,
         filters: false,
         settings: false,
         disconnecting: false,
-        tabs
+        productNs: PRODUCT_NS,
+        tabs,
       };
     },
     computed: {
       ...mapState(AUTH_NS, {
         [AUTH_USER]: (state) => state.user
       }),
+      ...mapState(PRODUCT_NS, [
+        PRODUCT_SHOW_FILTERS
+      ]),
       filtersCount() {
         return this.$store.getters[PRODUCT_GETTER_FILTERS].length;
       }
     },
     methods: {
+      toggleFilters() {
+        this.$store.dispatch(PRODUCT_DISPATCH_TOGGLE_FILTERS);
+      },
       logout() {
         this.disconnecting = true;
         setTimeout(() => {

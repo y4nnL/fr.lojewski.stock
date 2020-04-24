@@ -12,6 +12,8 @@ export const PRODUCT_DECREMENT = 'decrement';
 export const PRODUCT_QUANTITY = 'quantity';
 export const PRODUCT_FILTERS = 'filters';
 export const PRODUCT_RESET_FILTERS = 'resetFilters';
+export const PRODUCT_TOGGLE_FILTERS = 'toggleFilters';
+export const PRODUCT_SHOW_FILTERS = 'showFilters';
 export const PRODUCT_TYPES = {
   ALL: 'all',
   FRUIT: 'fruit',
@@ -35,3 +37,5 @@ export const PRODUCT_DISPATCH_DECREMENT = `${PRODUCT_NS}/${PRODUCT_DECREMENT}`;
 export const PRODUCT_DISPATCH_QUANTITY = `${PRODUCT_NS}/${PRODUCT_QUANTITY}`;
 export const PRODUCT_DISPATCH_FETCH_LIST = `${PRODUCT_NS}/${PRODUCT_FETCH_LIST}`;
 export const PRODUCT_DISPATCH_RESET_FILTERS = `${PRODUCT_NS}/${PRODUCT_RESET_FILTERS}`;
+export const PRODUCT_DISPATCH_TOGGLE_FILTERS = `${PRODUCT_NS}/${PRODUCT_TOGGLE_FILTERS}`;
+
