@@ -5,6 +5,7 @@ export default function () {
     alert: false,
     os: false,
     list: [],
+    keep: [],
     showFilters: false
   }
 }
