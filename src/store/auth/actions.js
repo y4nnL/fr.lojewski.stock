@@ -1,33 +1,37 @@
+import * as constants from './constants';
 import Firebase from 'firebase';
 import 'firebase/auth';
 
-import {
-  AUTH_LOGIN,
-  AUTH_LOGOUT,
-  AUTH_USER
-} from './constants';
-import { ROUTE_NAME_AUTH } from 'src/router/constants';
-
 export default {
-  [AUTH_LOGIN]: ({ commit }, payload) => {
+  /**
+   * Attempt to log in to the Firebase database
+   * @param {string} username The user's name
+   * @param {string} password The user's password
+   * @returns {Promise<string>}
+   */
+  [constants.AUTH_KEY_LOGIN]: ({ commit }, { username, password }) => {
     return new Promise((resolve, reject) => {
       Firebase.auth()
-        .signInWithEmailAndPassword(payload.username, payload.password)
+        .signInWithEmailAndPassword(username, password)
         .then(({ user }) => {
-          commit(AUTH_USER, { name: user.email });
-          resolve();
+          commit(constants.AUTH_KEY_EMAIL, user.email);
+          resolve(user.email);
         })
         .catch(reject);
     });
   },
-  [AUTH_LOGOUT]: ({ commit }) => {
+  /**
+   * Attempt to log out of the Firebase database
+   * @returns {Promise<void>}
+   */
+  [constants.AUTH_KEY_LOGOUT]: ({ commit }) => {
     return new Promise((resolve, reject) => {
       Firebase.auth()
         .signOut()
         .then(() => {
-          commit(AUTH_USER, { name: '' });
+          commit(constants.AUTH_KEY_EMAIL, '');
           resolve();
         }).catch(reject);
     });
-  }
+  },
 };

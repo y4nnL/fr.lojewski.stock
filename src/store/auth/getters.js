@@ -1,7 +1,11 @@
-import { AUTH_IS_AUTHENTICATED } from './constants';
+import * as constants from './constants';
 
 export default {
-  [AUTH_IS_AUTHENTICATED]: (state) => {
-    return state.user.name;
-  }
+  /**
+   * Whether the user is authenticated
+   * @returns {boolean}
+   */
+  [constants.AUTH_KEY_IS_AUTHENTICATED]: (state) => {
+    return !!state[constants.AUTH_KEY_EMAIL];
+  },
 };

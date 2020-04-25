@@ -1,39 +1,57 @@
-import { AUTH_DISPATCH_LOGIN } from 'src/store/auth/constants';
-import { ROUTE_NAME_STOCK } from 'src/router/constants';
+import * as authConstants from 'src/store/auth/constants';
+import * as productConstants from 'src/router/constants';
 
 export default {
   name: 'Auth',
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   data() {
     return {
-      submitting: false,
-      error: false,
+      /**
+       * Whether the form is submitting
+       * @type {boolean}
+       */
+      isSubmitting: false,
+      /**
+       * The password input v-model
+       * @type {string}
+       */
+      password: '',
+      /**
+       * The username input v-model
+       * @type {string}
+       */
       username: '',
-      password: ''
     };
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   methods: {
-    onSubmit() {
+    /**
+     * Submit the given username/password couple to the store
+     */
+    submit() {
       if (this.isValid) {
-        this.submitting = true;
-        this.error = false;
-        this.$store.dispatch(AUTH_DISPATCH_LOGIN, { username: this.username, password: this.password })
-          .then(() => {
-            this.$router.push({ name: ROUTE_NAME_STOCK });
-          })
-          .catch(() => {
-            this.$q.dialog({
-              message: 'Connexion impossible'
-            });
-          })
-          .finally(() => {
-            this.submitting = false;
-          });
+        let payload =  {
+          username: this.username,
+          password: this.password,
+        };
+
+        this.isSubmitting = true;
+
+        this.$store.dispatch(authConstants.AUTH_ACTION_LOGIN, payload)
+          .then(() => this.$router.push({ name: productConstants.ROUTE_NAME_STOCK }))
+          .catch(() => this.$q.dialog({ message: 'Connexion impossible' }))
+          .finally(() => this.isSubmitting = false);
       }
-    }
+    },
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   computed: {
+    /**
+     * Whether the form is ready to be submitted
+     * @returns {boolean}
+     */
     isValid() {
-      return !!(!this.submitting && this.username && this.password);
-    }
+      return !!(!this.isSubmitting && this.username && this.password);
+    },
   }
 };

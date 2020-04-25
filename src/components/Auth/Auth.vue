@@ -2,49 +2,49 @@
 
   <q-layout view="hhh lpr fff">
     <q-page-container>
-      <q-page class="flex justify-center items-center auth-page">
+      <q-page class="auth-page flex items-center justify-center">
         <q-card>
           <q-card-section class="bg-primary text-white">
             <div class="text-h6">Bienvenue sur Stock</div>
             <div class="text-subtitle2">Connexion</div>
           </q-card-section>
-          <q-form @submit.prevent.stop="onSubmit">
+          <q-form @submit.prevent.stop="submit">
             <q-card-section>
               <q-input class="auth-input q-my-md"
-                       type="email"
-                       ref="username"
                        color="accent"
                        placeholder="Email"
+                       ref="username"
+                       type="email"
+                       v-model="username"
+                       :disable="isSubmitting"
                        outlined
-                       square
-                       :disable="submitting"
-                       v-model="username">
+                       square>
                 <template v-slot:prepend>
                   <q-icon name="person"/>
                 </template>
               </q-input>
               <q-input class="auth-input q-my-md"
-                       type="password"
-                       ref="password"
                        color="accent"
                        placeholder="Mot de passe"
+                       ref="password"
+                       type="password"
+                       v-model="password"
+                       :disable="isSubmitting"
                        outlined
-                       square
-                       :disable="submitting"
-                       v-model="password">
+                       square>
                 <template v-slot:prepend>
                   <q-icon name="lock"/>
                 </template>
               </q-input>
             </q-card-section>
             <q-separator></q-separator>
-            <q-card-actions class="q-pa-md"
-                            align="right">
-              <q-btn flat
+            <q-card-actions align="right"
+                            class="q-pa-md">
+              <q-btn class="bg-secondary text-white"
                      type="submit"
                      :disable="!isValid"
-                     :loading="submitting"
-                     class="bg-secondary text-white">
+                     :loading="isSubmitting"
+                     flat>
                 Connexion
               </q-btn>
             </q-card-actions>

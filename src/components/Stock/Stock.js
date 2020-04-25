@@ -1,66 +1,123 @@
-import Settings from '../Settings/Settings.vue';
+import * as authConstants from 'src/store/auth/constants';
+import * as productConstants from 'src/store/product/constants';
+import * as routerConstants from 'src/router/constants';
+import * as vuexHelpers from 'vuex';
 import Filters from '../Filters/Filters.vue';
-import { mapState } from 'vuex';
-import {
-  PRODUCT_DISPATCH_TOGGLE_FILTERS,
-  PRODUCT_GETTER_FILTERS, PRODUCT_NS, PRODUCT_SHOW_FILTERS,
-  PRODUCT_TYPES
-} from 'src/store/product/constants';
-import {
-  AUTH_NS, AUTH_USER,
-  AUTH_DISPATCH_LOGOUT
-} from 'src/store/auth/constants';
-import { ROUTE_NAME_AUTH } from 'src/router/constants';
+import Settings from '../Settings/Settings.vue';
 
+/**
+ * Product type translation table
+ * @type {Object<string>}
+ */
 const tabs = {
-  [PRODUCT_TYPES.ALL]: 'Tous',
-  [PRODUCT_TYPES.FRUIT]: 'Fruits & Légumes',
-  [PRODUCT_TYPES.PROTEIN]: 'Protéines',
-  [PRODUCT_TYPES.CARBOHYDRATE]: 'Féculents',
-  [PRODUCT_TYPES.FRESH]: 'Frais',
-  [PRODUCT_TYPES.DRINK]: 'Boissons',
-  [PRODUCT_TYPES.OTHER]: 'Autres'
+  [productConstants.PRODUCT_TYPES.ALL]: 'Tous',
+  [productConstants.PRODUCT_TYPES.FRUIT]: 'Fruits & Légumes',
+  [productConstants.PRODUCT_TYPES.PROTEIN]: 'Protéines',
+  [productConstants.PRODUCT_TYPES.CARBOHYDRATE]: 'Féculents',
+  [productConstants.PRODUCT_TYPES.FRESH]: 'Frais',
+  [productConstants.PRODUCT_TYPES.DRINK]: 'Boissons',
+  [productConstants.PRODUCT_TYPES.OTHER]: 'Autres'
 };
 
 export default {
   name: 'Stock',
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   components: {
+    Filters,
     Settings,
-    Filters
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   data() {
     return {
-      filtersHeight: 0,
-      account: false,
-      filters: false,
-      settings: false,
+      /**
+       * Disconnect button loading state
+       * @type {boolean}
+       */
       disconnecting: false,
-      productNs: PRODUCT_NS,
-      tabs
+      /**
+       * Whether the state contains filters
+       * @type {boolean}
+       */
+      filters: false,
+      /**
+       * The calculated height of the filters component
+       * @type {number}
+       */
+      filtersHeight: 0,
+      /**
+       * The header's height. Useful to calculate proper filters height and container top
+       * @type {number}
+       */
+      headerHeightHint: 98,
+      /**
+       * Alias of the product namespace
+       * @type {string}
+       */
+      productNs: productConstants.PRODUCT_NS,
+      /**
+       * Whether show the setting backdrop
+       * @type {boolean}
+       */
+      settings: false,
+      /**
+       * Product type translation table
+       * @type {Object<string>}
+       */
+      tabs,
     };
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   computed: {
-    ...mapState(AUTH_NS, {
-      [AUTH_USER]: (state) => state.user
+    ...vuexHelpers.mapState(authConstants.AUTH_NS, {
+      email: authConstants.AUTH_KEY_EMAIL,
     }),
-    ...mapState(PRODUCT_NS, [
-      PRODUCT_SHOW_FILTERS
-    ]),
+    ...vuexHelpers.mapState(productConstants.PRODUCT_NS, {
+      showFilters: productConstants.PRODUCT_SHOW_FILTERS
+    }),
+    /**
+     * Number of current store state active filters
+     * @returns {number}
+     */
     filtersCount() {
-      return this.$store.getters[PRODUCT_GETTER_FILTERS].length;
-    }
-  },
-  methods: {
-    toggleFilters() {
-      this.$store.dispatch(PRODUCT_DISPATCH_TOGGLE_FILTERS);
+      return this.$store.getters[productConstants.PRODUCT_GETTER_FILTERS].length;
     },
+    /**
+     * The calculated style attribute of the filters component
+     * @returns {{height: string}}
+     */
+    filtersStyle() {
+      return {
+        height: this.showFilters ? this.filtersHeight + 'px' : '0',
+      };
+    },
+    /**
+     * The calculated style attribute of the page container component
+     * @returns {{top: string}}
+     */
+    pageContainerStyle() {
+      return {
+        top: (this.showFilters ? this.headerHeightHint + this.filtersHeight: this.headerHeightHint) + 'px',
+      };
+    },
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  methods: {
+    /**
+     * Toggle the filters component visibility by triggering the corresponding store action
+     */
+    toggleFilters() {
+      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_TOGGLE_FILTERS);
+    },
+    /**
+     * Trigger the logout store action
+     */
     logout() {
       this.disconnecting = true;
       setTimeout(() => {
-        this.$store.dispatch(AUTH_DISPATCH_LOGOUT)
-          .then(() => this.$router.push({ name: ROUTE_NAME_AUTH }))
+        this.$store.dispatch(authConstants.AUTH_ACTION_LOGOUT)
+          .then(() => this.$router.push({ name:routerConstants.ROUTE_NAME_AUTH }))
           .finally(() => this.disconnecting = false);
       }, 750);
-    }
-  }
+    },
+  },
 };

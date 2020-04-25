@@ -1,7 +1,7 @@
+import * as constants from './constants';
+
 export default function () {
   return {
-    user: {
-      name: ''
-    }
+    [constants.AUTH_KEY_EMAIL]: '',
   };
 };

@@ -1,10 +1,10 @@
 import Firebase from 'firebase/app';
+import firebaseConf from '../../firebase.conf';
 import 'firebase/firestore';
-import conf from '../../firebase.conf';
 
 export const FIRESTORE_COLLECTION_PRODUCTS = 'products';
 
 export default ({ Vue }) => {
-  Firebase.initializeApp(conf);
+  Firebase.initializeApp(firebaseConf);
   Vue.prototype.$firebase = Firebase;
 }

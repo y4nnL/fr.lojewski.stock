@@ -1,7 +1,11 @@
-import { AUTH_USER } from './constants';
+import * as constants from './constants';
 
 export default {
-  [AUTH_USER]: (state, user) => {
-    state.user = user;
-  }
+  /**
+   * Commit the given email to te store
+   * @param {string} email Email to commit
+   */
+  [constants.AUTH_KEY_EMAIL]: (state, email) => {
+    state[constants.AUTH_KEY_EMAIL] = '' + email;
+  },
 };

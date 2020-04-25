@@ -1,13 +1,25 @@
 export const AUTH_NS = 'auth';
 
-export const AUTH_USER = 'user';
-export const AUTH_IS_AUTHENTICATED = 'isAuthenticated';
-export const AUTH_LOGIN = 'login';
-export const AUTH_LOGOUT = 'logout';
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Keys
 
-export const AUTH_GETTER_IS_AUTHENTICATED = `${AUTH_NS}/${AUTH_IS_AUTHENTICATED}`;
+export const AUTH_KEY_EMAIL = 'user';
+export const AUTH_KEY_IS_AUTHENTICATED = 'isAuthenticated';
+export const AUTH_KEY_LOGIN = 'login';
+export const AUTH_KEY_LOGOUT = 'logout';
 
-export const AUTH_MUTATION_USER = `${AUTH_NS}/${AUTH_USER}`;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Actions
 
-export const AUTH_DISPATCH_LOGIN = `${AUTH_NS}/${AUTH_LOGIN}`;
-export const AUTH_DISPATCH_LOGOUT = `${AUTH_NS}/${AUTH_LOGOUT}`;
+export const AUTH_ACTION_LOGIN = `${ AUTH_NS }/${ AUTH_KEY_LOGIN }`;
+export const AUTH_ACTION_LOGOUT = `${ AUTH_NS }/${ AUTH_KEY_LOGOUT }`;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Mutations
+
+export const AUTH_MUTATION_EMAIL = `${ AUTH_NS }/${ AUTH_KEY_EMAIL }`;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Getters
+
+export const AUTH_GETTER_IS_AUTHENTICATED = `${ AUTH_NS }/${ AUTH_KEY_IS_AUTHENTICATED }`;
