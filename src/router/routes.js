@@ -5,6 +5,7 @@ import {
 } from './constants';
 
 import AuthRoute from 'src/components/AuthRoute/AuthRoute.vue';
+import Stock from 'src/components/Stock/Stock.vue';
 
 const routes = [
   {
@@ -17,7 +18,7 @@ const routes = [
     name: ROUTE_NAME_PRODUCTS,
     redirect: '/products/all',
     meta: { auth: true },
-    component: () => import('layouts/Products.vue'),
+    component: Stock,
     children: [
       {
         path: `/products/:type(${Object.values(PRODUCT_TYPES).join('|')})`,
