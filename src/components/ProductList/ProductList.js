@@ -1,27 +1,28 @@
+import * as productConstants from 'src/store/product/constants';
 import Product from '../Product/Product.vue';
-import {
-  PRODUCT_GETTER_FILTERED_LIST,
-  PRODUCT_DISPATCH_INCREMENT,
-  PRODUCT_DISPATCH_DECREMENT,
-  PRODUCT_DISPATCH_QUANTITY,
-  PRODUCT_DISPATCH_FETCH_LIST,
-  PRODUCT_DISPATCH_RESET_FILTERS,
-  PRODUCT_GETTER_FILTERS, PRODUCT_NS, PRODUCT_SHOW_FILTERS
-} from 'src/store/product/constants';
 import { QSpinnerGears } from 'quasar';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'ProductList',
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  components: {
+    Product,
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   data() {
     return {
-      productNs: PRODUCT_NS,
-      fetching: true
+      /**
+       * Whether the store is fetching the product list
+       * @type {boolean}
+       */
+      fetching: true,
     };
   },
-  components: {
-    Product
-  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /**
+   * Put the UI in loading state while fetching product list
+   */
   created() {
     this.$q.loading.show({
       spinner: QSpinnerGears
@@ -31,40 +32,71 @@ export default {
       setTimeout(() => this.$q.loading.hide(), 500);
     });
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   computed: {
-    filteredProducts() {
-      return this.$store.getters[PRODUCT_GETTER_FILTERED_LIST];
-    },
+    /**
+     * The store filtered product list
+     * @name filteredList
+     * @type {Array}
+     */
+    ...mapGetters(productConstants.PRODUCT_NS, [ productConstants.PRODUCT_FILTERED_LIST ]),
+    /**
+     * Whether the product list have active filters
+     * @type {boolean}
+     */
     hasFilters() {
-      return !!this.$store.getters[PRODUCT_GETTER_FILTERS].length;
+      return !!this.$store.getters[productConstants.PRODUCT_GETTER_FILTERS].length;
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   methods: {
-    refresh(done) {
-      this.$store.dispatch(PRODUCT_DISPATCH_FETCH_LIST)
-        .finally(done);
-    },
-    increment(product, { unitIndex }) {
-      this.$store.dispatch(PRODUCT_DISPATCH_INCREMENT, {
-        productId: product.id,
-        unitIndex
-      });
-    },
+    /**
+     * Dispatch the decrement production unit action
+     * @param {object} product
+     * @param {number} unitIndex
+     */
     decrement(product, { unitIndex }) {
-      this.$store.dispatch(PRODUCT_DISPATCH_DECREMENT, {
-        productId: product.id,
-        unitIndex
-      });
-    },
-    quantity(product, { unitIndex, quantity }) {
-      this.$store.dispatch(PRODUCT_DISPATCH_QUANTITY, {
+      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_DECREMENT, {
         productId: product.id,
         unitIndex,
-        quantity
       });
     },
+    /**
+     * Dispatch the increment production unit action
+     * @param {object} product
+     * @param {number} unitIndex
+     */
+    increment(product, { unitIndex }) {
+      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_INCREMENT, {
+        productId: product.id,
+        unitIndex,
+      });
+    },
+    /**
+     * Dispatch the quantity production unit action
+     * @param {object} product
+     * @param {number} unitIndex
+     * @param {number} quantity
+     */
+    quantity(product, { unitIndex, quantity }) {
+      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_QUANTITY, {
+        productId: product.id,
+        unitIndex,
+        quantity,
+      });
+    },
+    /**
+     * Do fetch the product list
+     */
+    refresh(done) {
+      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_FETCH_LIST)
+        .finally(done);
+    },
+    /**
+     * Rest all the product filters
+     */
     resetFilters() {
-      this.$store.dispatch(PRODUCT_DISPATCH_RESET_FILTERS);
-    }
+      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_RESET_FILTERS);
+    },
   }
 };

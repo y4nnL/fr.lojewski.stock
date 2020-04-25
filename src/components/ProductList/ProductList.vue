@@ -1,12 +1,12 @@
 <template>
 
-
-  <transition appear name="product-list-fade">
-    <template v-if="!fetching && filteredProducts.length">
+  <transition name="product-list-fade"
+              appear>
+    <template v-if="!fetching && filteredList.length">
       <q-pull-to-refresh @refresh="refresh">
-        <div class="flex row q-pa-md q-col-gutter-md items-stretch">
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 items-stretch"
-               v-for="product in filteredProducts"
+        <div class="flex items-stretch q-col-gutter-md q-pa-md row">
+          <div class="items-stretch col-lg-3 col-md-4 col-sm-6 col-xs-12"
+               v-for="product in filteredList"
                :key="product.id">
             <product v-bind="product"
                      @increment="increment(product, $event)"
@@ -16,26 +16,26 @@
         </div>
       </q-pull-to-refresh>
     </template>
-    <template v-if="!fetching && !filteredProducts.length">
-      <div class="absolute-top text-center full-width q-pt-lg">
+    <template v-if="!fetching && !filteredList.length">
+      <div class="absolute-top full-width text-center q-pt-lg">
         <p>
           <img src="~assets/sad.svg"
-               style="width:30vw;max-width:150px;">
+               style="width: 30vw; max-width: 150px;">
         </p>
         <p class="text-faded text-h6">Aucun produit trouvé</p>
-        <div v-if="hasFilters"
-             class="text-faded">
-          <p class="q-pa-none q-ma-none q-mb-xs">Des filtres sont actifs</p>
-          <q-btn v-if="hasFilters"
-                 flat
-                 class="bg-secondary text-white"
-                 @click="resetFilters">
+        <div class="text-faded"
+             v-if="hasFilters">
+          <p class="q-ma-none q-mb-xs q-pa-none">Des filtres sont actifs</p>
+          <q-btn class="bg-secondary text-white"
+                 v-if="hasFilters"
+                 @click="resetFilters"
+                 flat>
             Supprimer les filtres
           </q-btn>
         </div>
-        <q-btn v-else
+        <q-btn class="bg-secondary text-white"
                flat
-               class="bg-secondary text-white">
+               v-else>
           Créer un produit
         </q-btn>
       </div>
