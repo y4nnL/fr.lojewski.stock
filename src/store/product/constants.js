@@ -14,6 +14,7 @@ export const PRODUCT_FILTERS = 'filters';
 export const PRODUCT_RESET_FILTERS = 'resetFilters';
 export const PRODUCT_TOGGLE_FILTERS = 'toggleFilters';
 export const PRODUCT_SHOW_FILTERS = 'showFilters';
+
 export const PRODUCT_TYPES = {
   ALL: 'all',
   FRUIT: 'fruit',
@@ -23,6 +24,11 @@ export const PRODUCT_TYPES = {
   DRINK: 'drink',
   OTHER: 'other'
 };
+
+export const PRODUCT_PLACEHOLDER_IMAGE = [
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADIAQMAAABoEU4WAAAAA1BMVEVwh',
+  'p6J5dQEAAAAHklEQVQYGe3BMQEAAADCIPunXghfYAAAAAAAAABwCB54AAEPpFPOAAAAAElFTkSuQmCC'
+].join('');
 
 export const PRODUCT_GETTER_FILTERED_LIST = `${PRODUCT_NS}/${PRODUCT_FILTERED_LIST}`;
 export const PRODUCT_GETTER_FILTERS = `${PRODUCT_NS}/${PRODUCT_FILTERS}`;

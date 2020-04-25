@@ -1,26 +1,27 @@
 <template>
+
   <q-card class="full-height">
     <q-img class="product-img"
-           :src="imagePath"
-           transition="fade"
            spinner-color="white"
-           placeholder-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADIAQMAAABoEU4WAAAAA1BMVEVwhp6J5dQEAAAAHklEQVQYGe3BMQEAAADCIPunXghfYAAAAAAAAABwCB54AAEPpFPOAAAAAElFTkSuQmCC">
-      <div class="absolute-bottom text-h6 product-title">{{ name }}</div>
+           transition="fade"
+           :placeholder-src="placeholderSrc"
+           :src="imagePath">
+      <div class="absolute-bottom product-title text-h6">{{ name }}</div>
       <template v-slot:loading>
         <q-spinner-gears color="white"/>
       </template>
     </q-img>
     <q-card-actions>
-      <product-unit v-for="(unit, index) in units"
-                    :key="index"
-                    class="q-pl-sm"
+      <product-unit class="q-pl-sm"
                     v-bind="unit"
+                    v-for="(unit, index) in units"
+                    :key="index"
                     @increment="$emit('increment', { unitIndex: index })"
                     @decrement="$emit('decrement', { unitIndex: index })"
-                    @quantity="$emit('quantity', { unitIndex: index, quantity: $event })"/>
+                    @quantity="$emit('quantity', { quantity: $event, unitIndex: index, })"/>
     </q-card-actions>
   </q-card>
-</template>
 
+</template>
 <style lang="scss" scoped>@import './Product';</style>
 <script src="./Product.js"></script>
