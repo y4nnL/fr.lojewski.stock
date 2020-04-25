@@ -17,14 +17,8 @@ export default {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   computed: {
     /**
-     * V-model of the store state "term" property
-     */
-    term: {
-      get() { return this.$store.state.product.term; },
-      set(value) { this.$store.commit(productConstants.PRODUCT_MUTATION_TERM, value); },
-    },
-    /**
      * V-model of the store state "alert" property
+     * @return {boolean}
      */
     alert: {
       get() { return this.$store.state.product.alert; },
@@ -32,22 +26,31 @@ export default {
     },
     /**
      * V-model of the store state "os" property
+     * @return {boolean}
      */
     os: {
       get() { return this.$store.state.product.os; },
       set(value) { this.$store.commit(productConstants.PRODUCT_MUTATION_OS, value); },
     },
+    /**
+     * V-model of the store state "term" property
+     * @return {string}
+     */
+    term: {
+      get() { return this.$store.state.product.term; },
+      set(value) { this.$store.commit(productConstants.PRODUCT_MUTATION_TERM, value); },
+    },
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  destroy() {
+    window.removeEventListener('deviceorientation', this._emitHeight, true);
+  },
   /**
    * Emit the new calculated height each time the orientation changes
    */
   mounted() {
     window.addEventListener('deviceorientation', this._emitHeight, true);
     this.emitHeight();
-  },
-  destroy() {
-    window.removeEventListener('deviceorientation', this._emitHeight, true);
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   methods: {

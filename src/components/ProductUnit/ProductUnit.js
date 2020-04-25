@@ -1,43 +1,82 @@
 export default {
   name: 'ProductUnit',
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   props: {
-    quantity: {
-      type: Number,
-      required: true,
-      default: 0
-    },
-    increment: {
-      type: Number,
-      required: true,
-      default: 1
-    },
-    one: {
-      type: String,
-      required: true,
-      default: ''
-    },
-    many: {
-      type: String,
-      required: true,
-      default: ''
-    },
+    /**
+     * Product unit alert threshold
+     */
     alert: {
+      default: 0,
+      required: true,
       type: Number,
-      required: true,
-      default: 0
     },
+    /**
+     * Product unit control type
+     */
     control: {
-      type: String,
+      default: 'number',
       required: true,
-      default: 'number'
-    }
-  },
-  computed: {
-    computedQuantity() {
-      return this.control === 'slider' ? 1 : this.quantity;
+      type: String,
     },
+    /**
+     * Product unit increment step
+     */
+    increment: {
+      default: 1,
+      required: true,
+      type: Number,
+    },
+    /**
+     * Product unit many label
+     */
+    many: {
+      default: '',
+      required: true,
+      type: String,
+    },
+    /**
+     * Product unit one label
+     */
+    one: {
+      default: '',
+      required: true,
+      type: String,
+    },
+    /**
+     * Product unit quantity
+     */
+    quantity: {
+      default: 0,
+      required: true,
+      type: Number,
+    },
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  data() {
+    return {
+      /**
+       * Avoid directly mutation the passed quantity property
+       * @type {number}
+       */
+      quantityModel: this.quantity,
+    };
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  computed: {
+    /**
+     * Product unit color state depending on the quantity
+     * @return {string}
+     */
     color() {
-      return this.quantity > this.alert ? 'green' : (this.quantity === 0 ? 'red' : 'orange');
-    }
+      let quantity = this.control === 'slider' ? this.quantityModel : this.quantity;
+      return quantity > this.alert ? 'green' : (quantity === 0 ? 'red' : 'orange');
+    },
+    /**
+     * Product unit quantity depending on the control type
+     * @return {string|number}
+     */
+    computedQuantity() {
+      return this.control === 'slider' ? this.quantityModel + '%' : this.quantity;
+    },
   }
 }

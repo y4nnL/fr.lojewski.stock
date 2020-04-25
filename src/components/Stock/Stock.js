@@ -1,9 +1,9 @@
 import * as authConstants from 'src/store/auth/constants';
 import * as productConstants from 'src/store/product/constants';
 import * as routerConstants from 'src/router/constants';
-import * as vuexHelpers from 'vuex';
 import Settings from '../Settings/Settings.vue';
 import StockFilter from '../StockFilter/StockFilter.vue';
+import { mapState } from 'vuex';
 
 /**
  * Product type translation table
@@ -67,16 +67,7 @@ export default {
      * The user's email
      * @name email
      */
-    ...vuexHelpers.mapState(authConstants.AUTH_NS, {
-      email: authConstants.AUTH_KEY_EMAIL,
-    }),
-    /**
-     * Whether show the FilterStock component
-     * @name showFilters
-     */
-    ...vuexHelpers.mapState(productConstants.PRODUCT_NS, {
-      showFilters: productConstants.PRODUCT_SHOW_FILTERS
-    }),
+    ...mapState(authConstants.AUTH_NS, { email: authConstants.AUTH_KEY_EMAIL }),
     /**
      * Number of current store state active filters
      * @returns {number}
@@ -89,28 +80,23 @@ export default {
      * @returns {{height: string}}
      */
     filtersStyle() {
-      return {
-        height: this.showFilters ? this.filtersHeight + 'px' : '0',
-      };
+      return { height: this.showFilters ? this.filtersHeight + 'px' : '0' };
     },
     /**
      * The calculated style attribute of the page container component
      * @returns {{top: string}}
      */
     pageContainerStyle() {
-      return {
-        top: (this.showFilters ? this.headerHeightHint + this.filtersHeight: this.headerHeightHint) + 'px',
-      };
+      return { top: (this.showFilters ? this.headerHeightHint + this.filtersHeight: this.headerHeightHint) + 'px' };
     },
+    /**
+     * Whether show the FilterStock component
+     * @name showFilters
+     */
+    ...mapState(productConstants.PRODUCT_NS, { showFilters: productConstants.PRODUCT_SHOW_FILTERS }),
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   methods: {
-    /**
-     * Toggle the filters component visibility by triggering the corresponding store action
-     */
-    toggleFilters() {
-      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_TOGGLE_FILTERS);
-    },
     /**
      * Trigger the logout store action
      */
@@ -121,6 +107,12 @@ export default {
           .then(() => this.$router.push({ name:routerConstants.ROUTE_NAME_AUTH }))
           .finally(() => this.disconnecting = false);
       }, 750);
+    },
+    /**
+     * Toggle the filters component visibility by triggering the corresponding store action
+     */
+    toggleFilters() {
+      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_TOGGLE_FILTERS);
     },
   },
 };

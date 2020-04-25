@@ -1,45 +1,51 @@
 <template>
+
   <div class="row full-width text-subtitle2">
     <div>
       Il reste
       <q-chip>
-        <q-avatar :color="color"
-                  class="overflow-hidden"
+        <q-avatar class="overflow-hidden"
                   size="md"
-                  text-color="white">
-          <span class="product-unit-quantity">{{ computedQuantity }}</span>
-          <span v-if="control === 'slider'"
-                class="product-unit-progressbar"
-                :style="{ top: (100 - quantity) + '%' }"/>
+                  text-color="white"
+                  :color="color">
+          <span class="product-unit-quantity"
+                :style="{ 'font-size': this.control === 'slider' ? '70%' : '100%' }">{{ computedQuantity }}</span>
+          <span class="product-unit-progressbar"
+                v-if="control === 'slider'"
+                :style="{ top: (100 - quantityModel) + '%' }"/>
         </q-avatar>
         <span v-if="quantity < 2">{{ one }}</span>
         <span v-else>{{ many }}</span>
       </q-chip>
     </div>
-    <q-space />
+    <q-space/>
     <div v-if="control === 'number'">
-      <q-btn flat round dense
-             color="accent"
+      <q-btn color="accent"
+             icon="add"
              @click="$emit('increment')"
-             icon="add"></q-btn>
-      <q-btn flat round dense
-             color="accent"
+             dense
+             flat
+             round/>
+      <q-btn color="accent"
+             icon="remove"
              @click="$emit('decrement')"
-             icon="remove"></q-btn>
+             dense
+             flat
+             round/>
     </div>
-    <div v-else="control === 'slider'"
-         class="product-unit-slider">
-      <q-slider v-model="quantity"
-                :min="0"
-                :max="100"
+    <div class="product-unit-slider"
+         v-else>
+      <q-slider color="accent"
                 label
-                :label-value="quantity + '%'"
-                color="accent"
-                @change="$emit('quantity', quantity)"
-                :step="increment"/>
+                v-model="quantityModel"
+                :label-value="this.one + ' ' + quantityModel + '%'"
+                :max="100"
+                :min="0"
+                :step="increment"
+                @change="$emit('quantity', quantityModel)"/>
     </div>
   </div>
-</template>
 
+</template>
 <style lang="scss" scoped>@import './ProductUnit';</style>
 <script src="./ProductUnit.js"></script>
