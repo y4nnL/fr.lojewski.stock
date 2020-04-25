@@ -54,10 +54,9 @@
                      :to="'/stock/' + to"/>
       </q-tabs>
     </q-header>
-    <filters class="fixed stock-filters"
-             :namespace="productNs"
-             :style="filtersStyle"
-             @height="filtersHeight = $event"/>
+    <stock-filter class="fixed stock-filters"
+                  :style="filtersStyle"
+                  @height="filtersHeight = $event"/>
     <q-page-container class="fixed stock-container"
                       :style="pageContainerStyle">
       <q-page class="stock-page">

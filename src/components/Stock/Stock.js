@@ -2,8 +2,8 @@ import * as authConstants from 'src/store/auth/constants';
 import * as productConstants from 'src/store/product/constants';
 import * as routerConstants from 'src/router/constants';
 import * as vuexHelpers from 'vuex';
-import Filters from '../Filters/Filters.vue';
 import Settings from '../Settings/Settings.vue';
+import StockFilter from '../StockFilter/StockFilter.vue';
 
 /**
  * Product type translation table
@@ -23,8 +23,8 @@ export default {
   name: 'Stock',
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   components: {
-    Filters,
     Settings,
+    StockFilter,
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   data() {
@@ -50,11 +50,6 @@ export default {
        */
       headerHeightHint: 98,
       /**
-       * Alias of the product namespace
-       * @type {string}
-       */
-      productNs: productConstants.PRODUCT_NS,
-      /**
        * Whether show the setting backdrop
        * @type {boolean}
        */
@@ -68,9 +63,17 @@ export default {
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   computed: {
+    /**
+     * The user's email
+     * @name email
+     */
     ...vuexHelpers.mapState(authConstants.AUTH_NS, {
       email: authConstants.AUTH_KEY_EMAIL,
     }),
+    /**
+     * Whether show the FilterStock component
+     * @name showFilters
+     */
     ...vuexHelpers.mapState(productConstants.PRODUCT_NS, {
       showFilters: productConstants.PRODUCT_SHOW_FILTERS
     }),

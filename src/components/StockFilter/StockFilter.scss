@@ -1,0 +1,16 @@
+.stock-filter-input {
+  font-size: 130%;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Animations
+
+.stock-filter-fade-enter-active,
+.stock-filter-fade-leave-active {
+  transition: opacity .5s;
+}
+
+.stock-filter-fade-enter,
+.stock-filter-fade-leave-to {
+  opacity: 0;
+}
