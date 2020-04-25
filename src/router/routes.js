@@ -1,7 +1,7 @@
 import { PRODUCT_TYPES } from '../store/product/constants';
 import {
   ROUTE_NAME_AUTH,
-  ROUTE_NAME_PRODUCTS
+  ROUTE_NAME_STOCK
 } from './constants';
 
 import Auth from 'src/components/Auth/Auth.vue';
@@ -14,14 +14,14 @@ const routes = [
     component: Auth
   },
   {
-    path: '/products',
-    name: ROUTE_NAME_PRODUCTS,
-    redirect: '/products/all',
+    path: '/stock',
+    name: ROUTE_NAME_STOCK,
+    redirect: '/stock/all',
     meta: { auth: true },
     component: Stock,
     children: [
       {
-        path: `/products/:type(${Object.values(PRODUCT_TYPES).join('|')})`,
+        path: `/stock/:type(${Object.values(PRODUCT_TYPES).join('|')})`,
         meta: { auth: true },
         component: () => import('pages/Products.vue')
       }
@@ -29,7 +29,7 @@ const routes = [
   },
   {
     path: '*',
-    redirect: '/products'
+    redirect: '/stock'
   }
 ];
 

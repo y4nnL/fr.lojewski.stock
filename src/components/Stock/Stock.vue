@@ -44,7 +44,7 @@
       </q-toolbar>
       <q-tabs align="left">
         <q-route-tab v-for="(label, to) in tabs"
-                     :to="'/products/' + to"
+                     :to="'/stock/' + to"
                      :label="label"
                      :key="to"/>
       </q-tabs>
