@@ -1,7 +1,7 @@
 <template>
 
   <q-layout view="hHh lpR fFf">
-    <q-header class="bg-primary text-white"
+    <q-header class="bg-spotted text-white"
               elevated
               :height-hint="headerHeightHint">
       <q-toolbar>

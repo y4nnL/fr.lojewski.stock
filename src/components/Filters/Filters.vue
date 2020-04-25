@@ -1,6 +1,6 @@
 <template>
   <div ref="rootElement">
-      <div class="bg-secondary text-white q-px-md q-py-sm text-h6">
+      <div class="bg-calm text-white q-px-md q-py-sm text-h6">
           Filtrer les produits
       </div>
       <div class="q-px-md q-pt-md">

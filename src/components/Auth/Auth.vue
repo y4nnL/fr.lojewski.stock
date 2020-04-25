@@ -2,9 +2,9 @@
 
   <q-layout view="hhh lpr fff">
     <q-page-container>
-      <q-page class="auth-page flex items-center justify-center">
+      <q-page class="bg-calm flex items-center justify-center">
         <q-card>
-          <q-card-section class="bg-primary text-white">
+          <q-card-section class="bg-spotted text-white">
             <div class="text-h6">Bienvenue sur Stock</div>
             <div class="text-subtitle2">Connexion</div>
           </q-card-section>
