@@ -1,8 +1,8 @@
-.s-product-unit-quantity {
+.product-unit-quantity {
   position: relative;
   z-index: 2;
 }
-.s-product-unit-progressbar {
+.product-unit-progressbar {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -10,7 +10,7 @@
   left: 0;
   background-color: rgba(0, 0, 0, .3);
 }
-.s-product-unit-slider {
+.product-unit-slider {
   width: 114px;
   padding-right: 9px;
 }

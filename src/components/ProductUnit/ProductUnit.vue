@@ -7,9 +7,9 @@
                   class="overflow-hidden"
                   size="md"
                   text-color="white">
-          <span class="s-product-unit-quantity">{{ computedQuantity }}</span>
+          <span class="product-unit-quantity">{{ computedQuantity }}</span>
           <span v-if="control === 'slider'"
-                class="s-product-unit-progressbar"
+                class="product-unit-progressbar"
                 :style="{ top: (100 - quantity) + '%' }"/>
         </q-avatar>
         <span v-if="quantity < 2">{{ one }}</span>
@@ -28,7 +28,7 @@
              icon="remove"></q-btn>
     </div>
     <div v-else="control === 'slider'"
-         class="s-product-unit-slider">
+         class="product-unit-slider">
       <q-slider v-model="quantity"
                 :min="0"
                 :max="100"

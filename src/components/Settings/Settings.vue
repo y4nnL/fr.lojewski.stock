@@ -1,7 +1,7 @@
 <template>
 
   <q-layout view="hHh lpR lfr"
-            class="bg-white s-settings"
+            class="bg-white settings"
             container>
     <q-header class="bg-secondary">
       <q-toolbar>

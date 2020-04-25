@@ -49,17 +49,17 @@
                      :key="to"/>
       </q-tabs>
     </q-header>
-    <s-filters :namespace="productNs"
-               class="fixed s-filters"
-               @height="filtersHeight = $event"
-               :style="{ height: showFilters ? filtersHeight + 'px' : 0 }"/>
+    <filters :namespace="productNs"
+             class="fixed s-filters"
+             @height="filtersHeight = $event"
+             :style="{ height: showFilters ? filtersHeight + 'px' : 0 }"/>
     <q-page-container class="fixed s-container"
                       :style="{ top: (showFilters ? 98 + filtersHeight: 98) + 'px' }">
       <router-view/>
     </q-page-container>
     <q-dialog v-model="settings"
               position="bottom">
-      <s-settings />
+      <settings/>
     </q-dialog>
   </q-layout>
 
@@ -71,24 +71,27 @@
     left: 0;
     right: 0;
   }
+
   .s-container {
     transition: top .3s ease-out;
     bottom: 0;
     padding: 0 !important;
     overflow: auto;
   }
+
   .s-filters {
     transition: height .3s ease-out;
     overflow: hidden;
   }
+
   .s-container > main {
     min-height: auto !important;
   }
 </style>
 <script>
 
-  import SSettings from '../components/Settings/Settings.vue';
-  import SFilters from '../components/Filters/Filters.vue';
+  import Settings from '../components/Settings/Settings.vue';
+  import Filters from '../components/Filters/Filters.vue';
   import { mapState } from 'vuex';
   import {
     PRODUCT_DISPATCH_TOGGLE_FILTERS,
@@ -114,8 +117,8 @@
   export default {
     name: 'Main',
     components: {
-      SSettings,
-      SFilters
+      Settings,
+      Filters
     },
     data() {
       return {
@@ -125,7 +128,7 @@
         settings: false,
         disconnecting: false,
         productNs: PRODUCT_NS,
-        tabs,
+        tabs
       };
     },
     computed: {

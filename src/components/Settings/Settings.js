@@ -2,7 +2,7 @@ import { mapState } from 'vuex';
 import { PRODUCT_LIST, PRODUCT_NS } from 'src/store/product/constants';
 
 export default {
-  name: 'SSettings',
+  name: 'Settings',
   data() {
     return {
       add: false,

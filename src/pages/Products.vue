@@ -8,10 +8,10 @@
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 items-stretch"
                  v-for="product in filteredProducts"
                  :key="product.id">
-              <s-product v-bind="product"
-                         @increment="increment(product, $event)"
-                         @decrement="decrement(product, $event)"
-                         @quantity="quantity(product, $event)"/>
+              <product v-bind="product"
+                       @increment="increment(product, $event)"
+                       @decrement="decrement(product, $event)"
+                       @quantity="quantity(product, $event)"/>
             </div>
           </div>
         </q-pull-to-refresh>
@@ -59,7 +59,7 @@
 </style>
 <script>
 
-  import SProduct from '../components/Product/Product.vue';
+  import Product from '../components/Product/Product.vue';
   import {
     PRODUCT_GETTER_FILTERED_LIST,
     PRODUCT_DISPATCH_INCREMENT,
@@ -81,7 +81,7 @@
       };
     },
     components: {
-      SProduct,
+      Product
     },
     created() {
       this.$q.loading.show({

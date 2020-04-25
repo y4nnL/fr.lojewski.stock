@@ -1,9 +1,9 @@
-import SProductUnit from '../ProductUnit/ProductUnit.vue';
+import ProductUnit from '../ProductUnit/ProductUnit.vue';
 
 export default {
-  name: 'SProduct',
+  name: 'Product',
   components: {
-    SProductUnit
+    ProductUnit
   },
   props: {
     id: {

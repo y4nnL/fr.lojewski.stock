@@ -1,5 +1,5 @@
 export default {
-  name: 'SProductUnit',
+  name: 'ProductUnit',
   props: {
     quantity: {
       type: Number,

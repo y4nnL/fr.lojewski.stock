@@ -5,7 +5,7 @@
       </div>
       <div class="q-px-md q-pt-md">
         <div>
-          <q-input class="s-input q-my-xs"
+          <q-input class="filters-input q-my-xs"
                    color="accent"
                    size="md"
                    outlined
@@ -15,7 +15,7 @@
               <q-icon name="search" />
             </template>
             <template v-slot:append>
-              <transition name="s-fade">
+              <transition name="filters-fade">
                 <q-btn v-show="term"
                        color="accent"
                        @click.stop="term = ''"
