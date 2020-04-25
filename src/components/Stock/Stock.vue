@@ -55,7 +55,9 @@
              :style="{ height: showFilters ? filtersHeight + 'px' : 0 }"/>
     <q-page-container class="fixed stock-container"
                       :style="{ top: (showFilters ? 98 + filtersHeight: 98) + 'px' }">
-      <router-view/>
+      <q-page class="stock-page">
+        <router-view/>
+      </q-page>
     </q-page-container>
     <q-dialog v-model="settings"
               position="bottom">

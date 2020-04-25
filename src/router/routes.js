@@ -6,6 +6,7 @@ import {
 
 import Auth from 'src/components/Auth/Auth.vue';
 import Stock from 'src/components/Stock/Stock.vue';
+import ProductList from 'src/components/ProductList/ProductList.vue';
 
 const routes = [
   {
@@ -23,7 +24,7 @@ const routes = [
       {
         path: `/stock/:type(${Object.values(PRODUCT_TYPES).join('|')})`,
         meta: { auth: true },
-        component: () => import('pages/Products.vue')
+        component: ProductList
       }
     ]
   },

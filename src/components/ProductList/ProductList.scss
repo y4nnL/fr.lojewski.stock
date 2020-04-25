@@ -1,0 +1,9 @@
+.product-list-fade-enter-active,
+.product-list-fade-leave-active {
+  transition: opacity .3s;
+}
+
+.product-list-fade-enter,
+.product-list-fade-leave-to {
+  opacity: 0;
+}
