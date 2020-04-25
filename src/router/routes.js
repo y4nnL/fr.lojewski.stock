@@ -4,14 +4,14 @@ import {
   ROUTE_NAME_PRODUCTS
 } from './constants';
 
-import AuthRoute from 'src/components/AuthRoute/AuthRoute.vue';
+import Auth from 'src/components/Auth/Auth.vue';
 import Stock from 'src/components/Stock/Stock.vue';
 
 const routes = [
   {
     path: '/auth',
     name: ROUTE_NAME_AUTH,
-    component: AuthRoute
+    component: Auth
   },
   {
     path: '/products',

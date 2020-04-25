@@ -2,7 +2,7 @@
 
   <q-layout view="hhh lpr fff">
     <q-page-container>
-      <q-page class="flex justify-center items-center authRoute-page">
+      <q-page class="flex justify-center items-center auth-page">
         <q-card>
           <q-card-section class="bg-primary text-white">
             <div class="text-h6">Bienvenue sur Stock</div>
@@ -10,7 +10,7 @@
           </q-card-section>
           <q-form @submit.prevent.stop="onSubmit">
             <q-card-section>
-              <q-input class="authRoute-input q-my-md"
+              <q-input class="auth-input q-my-md"
                        type="email"
                        ref="username"
                        color="accent"
@@ -23,7 +23,7 @@
                   <q-icon name="person"/>
                 </template>
               </q-input>
-              <q-input class="authRoute-input q-my-md"
+              <q-input class="auth-input q-my-md"
                        type="password"
                        ref="password"
                        color="accent"
@@ -55,5 +55,5 @@
   </q-layout>
 
 </template>
-<style lang="scss" scoped>@import './AuthRoute';</style>
-<script src="./AuthRoute.js"></script>
+<style lang="scss" scoped>@import './Auth';</style>
+<script src="./Auth.js"></script>
