@@ -17,6 +17,21 @@ export default {
        * @type {boolean}
        */
       fetching: true,
+      /**
+       * We need to know the container element scrollTop in order to calculate the QPullToRefresh disability
+       * @type {Element}
+       */
+      ptrContainer: null,
+      /**
+       * Whether QPullToRefresh component is disabled
+       * @type {boolean}
+       */
+      ptrDisability: false,
+      /**
+       * Check the QPullToRefresh disability at each interval
+       * @type {number}
+       */
+      ptrInterval: 0,
     };
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,12 +40,27 @@ export default {
    */
   created() {
     this.$q.loading.show({
-      spinner: QSpinnerGears
+      spinner: QSpinnerGears,
     });
     this.refresh(() => {
       this.fetching = false;
       setTimeout(() => this.$q.loading.hide(), 500);
     });
+  },
+  destroy() {
+    window.clearInterval(this.ptrInterval);
+  },
+  /**
+   * QPullToRefresh breaks vertical scroll on parent fixed container
+   * https://github.com/quasarframework/quasar/issues/3644
+   */
+  mounted() {
+    let parent = this.$el;
+    do {
+      parent = parent.parentNode;
+    } while (!parent.classList.contains('fix-qpulltorefresh'));
+    this.ptrContainer = parent;
+    this.ptrInterval = setInterval(() => this.ptrDisability = this.ptrContainer.scrollTop > 0, 200);
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   computed: {
@@ -46,7 +76,7 @@ export default {
      */
     hasFilters() {
       return !!this.$store.getters[productConstants.PRODUCT_GETTER_FILTERS].length;
-    }
+    },
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   methods: {
@@ -98,5 +128,5 @@ export default {
     resetFilters() {
       this.$store.dispatch(productConstants.PRODUCT_DISPATCH_RESET_FILTERS);
     },
-  }
+  },
 };

@@ -57,7 +57,7 @@
     <stock-filter class="fixed stock-filters"
                   :style="filtersStyle"
                   @height="filtersHeight = $event"/>
-    <q-page-container class="fixed stock-container"
+    <q-page-container class="fix-qpulltorefresh fixed stock-container"
                       :style="pageContainerStyle">
       <q-page class="stock-page">
         <router-view/>
