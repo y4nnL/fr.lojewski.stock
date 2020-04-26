@@ -25,6 +25,7 @@ module.exports = function (/* ctx */) {
       'firebase',
       'navigation',
       'auth',
+      'orientationchangeend',
     ],
 
     // Custom root component location

@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       /**
-       * Avoid directly mutation the passed quantity property
+       * Avoid directly mutating the passed quantity prop
        * @type {number}
        */
       quantityModel: this.quantity,

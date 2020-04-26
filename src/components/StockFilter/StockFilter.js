@@ -43,13 +43,13 @@ export default {
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   destroy() {
-    window.removeEventListener('deviceorientation', this._emitHeight, true);
+    window.removeEventListener('orientationchangeend', this.emitHeight);
   },
-  /**
-   * Emit the new calculated height each time the orientation changes
-   */
   mounted() {
-    window.addEventListener('deviceorientation', this._emitHeight, true);
+    // We need to recalculate the height on mobile platforms
+    if ('screen' in window) {
+      window.addEventListener('orientationchangeend', this.emitHeight);
+    }
     this.emitHeight();
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ export default {
      * Emit the new calculated height
      */
     emitHeight() {
-      if (this.$refs && this.$refs.rootElement && this.$refs.rootElement.style) {
+      if (this.$refs && this.$refs.rootElement) {
         let height = this.$refs.rootElement.style.height;
         this.$refs.rootElement.style.height = 'auto';
         this.$emit('height', this.$refs.rootElement.clientHeight);

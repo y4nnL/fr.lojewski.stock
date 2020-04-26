@@ -14,6 +14,7 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
     "firebase": "^7.14.1",
+    "orientationchangeend": "^1.1.2",
     "quasar": "^1.0.0"
   },
   "devDependencies": {
