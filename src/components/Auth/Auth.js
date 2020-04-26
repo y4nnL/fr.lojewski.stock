@@ -30,7 +30,7 @@ export default {
      */
     submit() {
       if (this.isValid) {
-        let payload =  {
+        let payload = {
           username: this.username,
           password: this.password,
         };
@@ -53,5 +53,5 @@ export default {
     isValid() {
       return !!(!this.isSubmitting && this.username && this.password);
     },
-  }
+  },
 };

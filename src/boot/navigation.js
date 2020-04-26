@@ -1,6 +1,6 @@
 import {
   ROUTE_NAME_AUTH,
-  ROUTE_NAME_STOCK
+  ROUTE_NAME_STOCK,
 } from 'src/router/constants';
 
 import { PRODUCT_MUTATION_TYPE } from 'src/store/product/constants';
@@ -15,7 +15,7 @@ export default ({ store, router }) => {
     let auth = to.matched.some(route => route.meta.auth);
     let isAuthenticated = store.getters[AUTH_GETTER_IS_AUTHENTICATED];
     auth ?
-      (isAuthenticated ? next() : next({ name: ROUTE_NAME_AUTH })):
+      (isAuthenticated ? next() : next({ name: ROUTE_NAME_AUTH })) :
       (isAuthenticated && to.name === ROUTE_NAME_AUTH ? next({ name: ROUTE_NAME_STOCK }) : next());
   });
 

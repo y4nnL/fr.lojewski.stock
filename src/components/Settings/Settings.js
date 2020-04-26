@@ -6,12 +6,12 @@ export default {
   data() {
     return {
       add: false,
-      right: false
-    }
+      right: false,
+    };
   },
   computed: {
     ...mapState(PRODUCT_NS, {
-      [PRODUCT_LIST]: (state) => state.list
-    })
-  }
-}
+      [PRODUCT_LIST]: (state) => state.list,
+    }),
+  },
+};

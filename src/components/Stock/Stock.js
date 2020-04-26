@@ -16,7 +16,7 @@ const tabs = {
   [productConstants.PRODUCT_TYPES.CARBOHYDRATE]: 'Féculents',
   [productConstants.PRODUCT_TYPES.FRESH]: 'Frais',
   [productConstants.PRODUCT_TYPES.DRINK]: 'Boissons',
-  [productConstants.PRODUCT_TYPES.OTHER]: 'Autres'
+  [productConstants.PRODUCT_TYPES.OTHER]: 'Autres',
 };
 
 export default {
@@ -87,7 +87,7 @@ export default {
      * @returns {{top: string}}
      */
     pageContainerStyle() {
-      return { top: (this.showFilters ? this.headerHeightHint + this.filtersHeight: this.headerHeightHint) + 'px' };
+      return { top: (this.showFilters ? this.headerHeightHint + this.filtersHeight : this.headerHeightHint) + 'px' };
     },
     /**
      * Whether show the FilterStock component
@@ -104,7 +104,7 @@ export default {
       this.disconnecting = true;
       setTimeout(() => {
         this.$store.dispatch(authConstants.AUTH_ACTION_LOGOUT)
-          .then(() => this.$router.push({ name:routerConstants.ROUTE_NAME_AUTH }))
+          .then(() => this.$router.push({ name: routerConstants.ROUTE_NAME_AUTH }))
           .finally(() => this.disconnecting = false);
       }, 750);
     },

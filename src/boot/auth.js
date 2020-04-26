@@ -18,7 +18,7 @@ export default ({ store }) => {
           resolve();
         },
         resolve,
-        resolve
+        resolve,
       );
   });
 }

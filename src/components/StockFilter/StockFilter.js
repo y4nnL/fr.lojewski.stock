@@ -21,24 +21,36 @@ export default {
      * @return {boolean}
      */
     alert: {
-      get() { return this.$store.state.product.alert; },
-      set(value) { this.$store.commit(productConstants.PRODUCT_MUTATION_ALERT, value); },
+      get() {
+        return this.$store.state.product.alert;
+      },
+      set(value) {
+        this.$store.commit(productConstants.PRODUCT_MUTATION_ALERT, value);
+      },
     },
     /**
      * V-model of the store state "os" property
      * @return {boolean}
      */
     os: {
-      get() { return this.$store.state.product.os; },
-      set(value) { this.$store.commit(productConstants.PRODUCT_MUTATION_OS, value); },
+      get() {
+        return this.$store.state.product.os;
+      },
+      set(value) {
+        this.$store.commit(productConstants.PRODUCT_MUTATION_OS, value);
+      },
     },
     /**
      * V-model of the store state "term" property
      * @return {string}
      */
     term: {
-      get() { return this.$store.state.product.term; },
-      set(value) { this.$store.commit(productConstants.PRODUCT_MUTATION_TERM, value); },
+      get() {
+        return this.$store.state.product.term;
+      },
+      set(value) {
+        this.$store.commit(productConstants.PRODUCT_MUTATION_TERM, value);
+      },
     },
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,4 +78,4 @@ export default {
       }
     },
   },
-}
+};
