@@ -1,36 +1,31 @@
-import { PRODUCT_TYPES } from '../store/product/constants';
-import {
-  ROUTE_NAME_AUTH,
-  ROUTE_NAME_STOCK
-} from './constants';
-
+import * as constants from './constants';
 import Auth from 'src/components/Auth/Auth.vue';
 import Stock from 'src/components/Stock/Stock.vue';
 import ProductList from 'src/components/ProductList/ProductList.vue';
 
 const routes = [
   {
-    path: '/auth',
-    name: ROUTE_NAME_AUTH,
+    path: constants.ROUTER_PATH_AUTH,
+    name: constants.ROUTER_NAME_AUTH,
     component: Auth
   },
   {
-    path: '/stock',
-    name: ROUTE_NAME_STOCK,
-    redirect: '/stock/all',
-    meta: { auth: true },
+    path: constants.ROUTER_PATH_STOCK,
+    name: constants.ROUTER_NAME_STOCK,
+    redirect: constants.ROUTER_PATH_STOCK_ALL,
+    meta: { [constants.ROUTER_META_AUTH]: true },
     component: Stock,
     children: [
       {
-        path: `/stock/:type(${Object.values(PRODUCT_TYPES).join('|')})`,
-        meta: { auth: true },
+        path: constants.ROUTER_PATH_STOCK_TYPE,
+        meta: { [constants.ROUTER_META_AUTH]: true },
         component: ProductList
       }
     ]
   },
   {
     path: '*',
-    redirect: '/stock'
+    redirect: constants.ROUTER_PATH_STOCK
   }
 ];
 

@@ -55,6 +55,11 @@ export default {
        */
       settings: false,
       /**
+       * Alias of the router stock path constant
+       * @type {string}
+       */
+      stockPath: routerConstants.ROUTER_PATH_STOCK,
+      /**
        * Product type translation table
        * @type {Object<string>}
        */
@@ -104,7 +109,7 @@ export default {
       this.disconnecting = true;
       setTimeout(() => {
         this.$store.dispatch(authConstants.AUTH_ACTION_LOGOUT)
-          .then(() => this.$router.push({ name: routerConstants.ROUTE_NAME_AUTH }))
+          .then(() => this.$router.push({ name: routerConstants.ROUTER_NAME_AUTH }))
           .finally(() => this.disconnecting = false);
       }, 750);
     },

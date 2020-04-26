@@ -1,2 +1,20 @@
-export const ROUTE_NAME_AUTH = 'all';
-export const ROUTE_NAME_STOCK = 'stock';
+import { PRODUCT_TYPES } from 'src/store/product/constants';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Meta keys
+
+export const ROUTER_META_AUTH = 'auth';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Paths
+
+export const ROUTER_PATH_AUTH = '/all';
+export const ROUTER_PATH_STOCK = '/stock';
+export const ROUTER_PATH_STOCK_ALL = '/stock/all';
+export const ROUTER_PATH_STOCK_TYPE = `/stock/:type(${Object.values(PRODUCT_TYPES).join('|')})`;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Names
+
+export const ROUTER_NAME_AUTH = 'all';
+export const ROUTER_NAME_STOCK = 'stock';

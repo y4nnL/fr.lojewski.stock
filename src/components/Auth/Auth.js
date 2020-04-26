@@ -1,5 +1,5 @@
-import * as authConstants from 'src/store/auth/constants';
-import * as productConstants from 'src/router/constants';
+import { AUTH_ACTION_LOGIN } from 'src/store/auth/constants';
+import { ROUTER_NAME_STOCK } from 'src/router/constants';
 
 export default {
   name: 'Auth',
@@ -37,8 +37,8 @@ export default {
 
         this.isSubmitting = true;
 
-        this.$store.dispatch(authConstants.AUTH_ACTION_LOGIN, payload)
-          .then(() => this.$router.push({ name: productConstants.ROUTE_NAME_STOCK }))
+        this.$store.dispatch(AUTH_ACTION_LOGIN, payload)
+          .then(() => this.$router.push({ name: ROUTER_NAME_STOCK }))
           .catch(() => this.$q.dialog({ message: 'Connexion impossible' }))
           .finally(() => this.isSubmitting = false);
       }

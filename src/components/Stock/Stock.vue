@@ -51,7 +51,7 @@
         <q-route-tab v-for="(label, to) in tabs"
                      :key="to"
                      :label="label"
-                     :to="'/stock/' + to"/>
+                     :to="`${stockPath}/${to}`"/>
       </q-tabs>
     </q-header>
     <stock-filter class="fixed stock-filters"
