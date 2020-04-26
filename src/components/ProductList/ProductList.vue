@@ -3,7 +3,10 @@
   <transition name="product-list-fade"
               appear>
     <template v-if="!fetching && filteredList.length">
-      <q-pull-to-refresh @refresh="refresh">
+      <!--
+      QPullToRefresh breaks vertical scroll on parent fixed element
+      https://github.com/quasarframework/quasar/issues/3644
+      <q-pull-to-refresh @refresh="refresh"> -->
         <div class="flex items-stretch q-col-gutter-md q-pa-md row">
           <div class="items-stretch col-lg-3 col-md-4 col-sm-6 col-xs-12"
                v-for="product in filteredList"
@@ -14,7 +17,7 @@
                      @quantity="quantity(product, $event)"/>
           </div>
         </div>
-      </q-pull-to-refresh>
+      <!-- </q-pull-to-refresh> -->
     </template>
     <template v-if="!fetching && !filteredList.length">
       <div class="absolute-top full-width text-center q-pt-lg">
