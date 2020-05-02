@@ -16,9 +16,9 @@
                     v-bind="unit"
                     v-for="(unit, index) in units"
                     :key="index"
-                    @increment="$emit('increment', { unitIndex: index })"
-                    @decrement="$emit('decrement', { unitIndex: index })"
-                    @quantity="$emit('quantity', { quantity: $event, unitIndex: index, })"/>
+                    @increment="$emit('increment', { productUnitIndex: index })"
+                    @decrement="$emit('decrement', { productUnitIndex: index })"
+                    @quantity="$emit('quantity', { productUnitQuantity: $event, productUnitIndex: index, })"/>
     </q-card-actions>
   </q-card>
 

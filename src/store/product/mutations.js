@@ -1,82 +1,119 @@
-import {
-  PRODUCT_ALERT,
-  PRODUCT_DECREMENT,
-  PRODUCT_INCREMENT,
-  PRODUCT_QUANTITY,
-  PRODUCT_OS,
-  PRODUCT_LIST,
-  PRODUCT_TERM,
-  PRODUCT_TYPE,
-  PRODUCT_TYPES, PRODUCT_SHOW_FILTERS, PRODUCT_FILTERS, PRODUCT_GETTER_FILTERS
-} from './constants';
-
-const types = Object.values(PRODUCT_TYPES);
+import * as c from './constants';
+import * as h from './helpers';
 
 export default {
-  [PRODUCT_TERM]: (state, term) => {
-    let oldTerm = state.term;
-    state.term = term ? '' + term : '';
-    if (state.term !== oldTerm) {
-      state.keep = [];
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Filters
+  /**
+   * Mutate the product alert filter
+   * @param {Object} state
+   * @param {boolean} alert
+   */
+  [c.PRODUCT_KEY_FILTER_ALERT]: (state, alert) => {
+    if (state[c.PRODUCT_KEY_FILTER_ALERT] !== alert) {
+      state[c.PRODUCT_KEY_FILTER_ALERT] = !!alert;
+      state[c.PRODUCT_KEY_FILTER_KEEP] = [];
     }
   },
-  [PRODUCT_TYPE]: (state, type) => {
-    let oldType = state.type;
-    if (types.indexOf(type) > -1) {
-      state.type = type;
-      if (state.type !== oldType) {
-        state.keep = [];
-      }
+  /**
+   * Mutate the product name filter
+   * @param {Object} state
+   * @param {string} name
+   */
+  [c.PRODUCT_KEY_FILTER_NAME]: (state, name) => {
+    if (state[c.PRODUCT_KEY_FILTER_NAME] !== name) {
+      state[c.PRODUCT_KEY_FILTER_NAME] = name ? '' + name : '';
+      state[c.PRODUCT_KEY_FILTER_KEEP] = [];
     }
   },
-  [PRODUCT_ALERT]: (state, alert) => {
-    let oldAlert = state.alert;
-    state.alert = !!alert;
-    if (state.alert !== oldAlert) {
-      state.keep = [];
+  /**
+   * Mutate the product os filter
+   * @param {Object} state
+   * @param {boolean} os
+   */
+  [c.PRODUCT_KEY_FILTER_OS]: (state, os) => {
+    if (state[c.PRODUCT_KEY_FILTER_OS] !== os) {
+      state[c.PRODUCT_KEY_FILTER_OS] = !!os;
+      state[c.PRODUCT_KEY_FILTER_KEEP] = [];
     }
   },
-  [PRODUCT_OS]: (state, os) => {
-    let oldOS = state.os;
-    state.os = !!os;
-    if (state.os !== oldOS) {
-      state.keep = [];
+  /**
+   * Mutate the product show filter
+   * @param {Object} state
+   * @param {boolean} show
+   */
+  [c.PRODUCT_KEY_FILTER_SHOW]: (state, show) => {
+    if (state[c.PRODUCT_KEY_FILTER_SHOW] !== show) {
+      state[c.PRODUCT_KEY_FILTER_SHOW] = !!show;
     }
   },
-  [PRODUCT_LIST]: (state, list) => {
-    state.list = list;
-  },
-  [PRODUCT_SHOW_FILTERS]: (state, showFilters) => {
-    state.showFilters = !!showFilters;
-  },
-  [PRODUCT_INCREMENT]: (state, { productId, unitIndex }) => {
-    let product = state.list.find((product) => product.id === productId);
-    let productUnit = product ? product.units[unitIndex] : null;
-    if (product && productUnit) {
-      productUnit.quantity += productUnit.increment;
-      if (state.keep.indexOf(product.id) < 0) {
-        state.keep.push(product.id);
-      }
+  /**
+   * Mutate the product type filter
+   * @param {Object} state
+   * @param {string} type
+   */
+  [c.PRODUCT_KEY_FILTER_TYPE]: (state, type) => {
+    if (state[c.PRODUCT_KEY_FILTER_TYPE] !== type && Object.values(c.PRODUCT_TYPES).indexOf(type) > -1) {
+      state[c.PRODUCT_KEY_FILTER_TYPE] = type;
+      state[c.PRODUCT_KEY_FILTER_KEEP] = [];
     }
   },
-  [PRODUCT_DECREMENT]: (state, { productId, unitIndex }) => {
-    let product = state.list.find((product) => product.id === productId);
-    let productUnit = product ? product.units[unitIndex] : null;
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // List
+  /**
+   * Mutate the product list
+   * @param {Object} state
+   * @param {Product[]} list
+   */
+  [c.PRODUCT_KEY_LIST]: (state, list) => {
+    state[c.PRODUCT_KEY_LIST] = list;
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Units
+  /**
+   * Decrement the given product unit
+   * @param {Object} state
+   * @param {string} productId
+   * @param {number} productUnitIndex
+   */
+  [c.PRODUCT_KEY_DECREMENT]: (state, { productId, productUnitIndex }) => {
+    let { product, productUnit } = h.findProductUnitByIndex(state, productId, productUnitIndex);
     if (product && productUnit && productUnit.quantity - productUnit.increment >= 0) {
       productUnit.quantity -= productUnit.increment;
-      if (state.keep.indexOf(product.id) < 0) {
-        state.keep.push(product.id);
+      if (state[c.PRODUCT_KEY_FILTER_KEEP].indexOf(product.id) < 0) {
+        state[c.PRODUCT_KEY_FILTER_KEEP].push(product.id);
       }
     }
   },
-  [PRODUCT_QUANTITY]: (state, { productId, unitIndex, quantity }) => {
-    let product = state.list.find((product) => product.id === productId);
-    let productUnit = product ? product.units[unitIndex] : null;
+  /**
+   * Increment the given product unit
+   * @param {Object} state
+   * @param {string} productId
+   * @param {number} productUnitIndex
+   */
+  [c.PRODUCT_KEY_INCREMENT]: (state, { productId, productUnitIndex }) => {
+    let { product, productUnit } = h.findProductUnitByIndex(state, productId, productUnitIndex);
     if (product && productUnit) {
-      productUnit.quantity = quantity;
-      if (state.keep.indexOf(product.id) < 0) {
-        state.keep.push(product.id);
+      productUnit.quantity += productUnit.increment;
+      if (state[c.PRODUCT_KEY_FILTER_KEEP].indexOf(product.id) < 0) {
+        state[c.PRODUCT_KEY_FILTER_KEEP].push(product.id);
       }
     }
-  }
+  },
+  /**
+   * Set the given product unit quantity
+   * @param {Object} state
+   * @param {string} productId
+   * @param {number} productUnitIndex
+   * @param {number} productUnitQuantity
+   */
+  [c.PRODUCT_KEY_QUANTITY]: (state, { productId, productUnitIndex, productUnitQuantity }) => {
+    let { product, productUnit } = h.findProductUnitByIndex(state, productId, productUnitIndex);
+    if (product && productUnit) {
+      productUnit.quantity = productUnitQuantity;
+      if (state[c.PRODUCT_KEY_FILTER_KEEP].indexOf(product.id) < 0) {
+        state[c.PRODUCT_KEY_FILTER_KEEP].push(product.id);
+      }
+    }
+  },
 };

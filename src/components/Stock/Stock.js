@@ -71,6 +71,7 @@ export default {
     /**
      * The user's email
      * @name email
+     * @type {string}
      */
     ...mapState(authConstants.AUTH_NS, { email: authConstants.AUTH_KEY_EMAIL }),
     /**
@@ -78,7 +79,7 @@ export default {
      * @returns {number}
      */
     filtersCount() {
-      return this.$store.getters[productConstants.PRODUCT_GETTER_FILTERS].length;
+      return this.$store.getters[productConstants.PRODUCT_GET_FILTERS].length;
     },
     /**
      * The calculated style attribute of the filters component
@@ -97,8 +98,9 @@ export default {
     /**
      * Whether show the FilterStock component
      * @name showFilters
+     * @type {boolean}
      */
-    ...mapState(productConstants.PRODUCT_NS, { showFilters: productConstants.PRODUCT_SHOW_FILTERS }),
+    ...mapState(productConstants.PRODUCT_NS, { showFilters: productConstants.PRODUCT_KEY_FILTER_SHOW }),
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   methods: {
@@ -117,7 +119,7 @@ export default {
      * Toggle the filters component visibility by triggering the corresponding store action
      */
     toggleFilters() {
-      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_TOGGLE_FILTERS);
+      this.$store.dispatch(productConstants.PRODUCT_DO_TOGGLE);
     },
   },
 };

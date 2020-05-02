@@ -1,20 +1,18 @@
 export const PRODUCT_NS = 'product';
 
-export const PRODUCT_FILTERED_LIST = 'filteredList';
-export const PRODUCT_FETCH_LIST = 'fetchList';
-export const PRODUCT_TERM = 'term';
-export const PRODUCT_TYPE = 'type';
-export const PRODUCT_ALERT = 'alert';
-export const PRODUCT_OS = 'os';
-export const PRODUCT_LIST = 'list';
-export const PRODUCT_INCREMENT = 'increment';
-export const PRODUCT_DECREMENT = 'decrement';
-export const PRODUCT_QUANTITY = 'quantity';
-export const PRODUCT_FILTERS = 'filters';
-export const PRODUCT_RESET_FILTERS = 'resetFilters';
-export const PRODUCT_TOGGLE_FILTERS = 'toggleFilters';
-export const PRODUCT_SHOW_FILTERS = 'showFilters';
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Globals
 
+export const PRODUCT_CONTROLS = {
+  NUMBER: 'number',
+  SLIDER: 'slider',
+};
+export const PRODUCT_FIRESTORE_COLLECTION = 'products';
+export const PRODUCT_FIRESTORE_ID = 'firestoreId';
+export const PRODUCT_PLACEHOLDER_IMAGE = [
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADIAQMAAABoEU4WAAAAA1BMVEVwh',
+  'p6J5dQEAAAAHklEQVQYGe3BMQEAAADCIPunXghfYAAAAAAAAABwCB54AAEPpFPOAAAAAElFTkSuQmCC',
+].join('');
 export const PRODUCT_TYPES = {
   ALL: 'all',
   FRUIT: 'fruit',
@@ -22,26 +20,47 @@ export const PRODUCT_TYPES = {
   CARBOHYDRATE: 'carbohydrate',
   FRESH: 'fresh',
   DRINK: 'drink',
-  OTHER: 'other'
+  OTHER: 'other',
 };
 
-export const PRODUCT_PLACEHOLDER_IMAGE = [
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADIAQMAAABoEU4WAAAAA1BMVEVwh',
-  'p6J5dQEAAAAHklEQVQYGe3BMQEAAADCIPunXghfYAAAAAAAAABwCB54AAEPpFPOAAAAAElFTkSuQmCC'
-].join('');
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Keys
 
-export const PRODUCT_GETTER_FILTERED_LIST = `${PRODUCT_NS}/${PRODUCT_FILTERED_LIST}`;
-export const PRODUCT_GETTER_FILTERS = `${PRODUCT_NS}/${PRODUCT_FILTERS}`;
+export const PRODUCT_KEY_DECREMENT = 'decrement';
+export const PRODUCT_KEY_FETCH = 'fetch';
+export const PRODUCT_KEY_FILTER_ALERT = 'alert';
+export const PRODUCT_KEY_FILTER_KEEP = 'keep';
+export const PRODUCT_KEY_FILTER_NAME = 'name';
+export const PRODUCT_KEY_FILTER_OS = 'os';
+export const PRODUCT_KEY_FILTER_SHOW = 'show';
+export const PRODUCT_KEY_FILTER_TYPE = 'type';
+export const PRODUCT_KEY_FILTERS = 'filters';
+export const PRODUCT_KEY_INCREMENT = 'increment';
+export const PRODUCT_KEY_LIST = 'list';
+export const PRODUCT_KEY_QUANTITY = 'quantity';
+export const PRODUCT_KEY_RESET = 'reset';
+export const PRODUCT_KEY_TOGGLE = 'toggle';
 
-export const PRODUCT_MUTATION_TERM = `${PRODUCT_NS}/${PRODUCT_TERM}`;
-export const PRODUCT_MUTATION_TYPE = `${PRODUCT_NS}/${PRODUCT_TYPE}`;
-export const PRODUCT_MUTATION_ALERT = `${PRODUCT_NS}/${PRODUCT_ALERT}`;
-export const PRODUCT_MUTATION_OS = `${PRODUCT_NS}/${PRODUCT_OS}`;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Actions (DO)
 
-export const PRODUCT_DISPATCH_INCREMENT = `${PRODUCT_NS}/${PRODUCT_INCREMENT}`;
-export const PRODUCT_DISPATCH_DECREMENT = `${PRODUCT_NS}/${PRODUCT_DECREMENT}`;
-export const PRODUCT_DISPATCH_QUANTITY = `${PRODUCT_NS}/${PRODUCT_QUANTITY}`;
-export const PRODUCT_DISPATCH_FETCH_LIST = `${PRODUCT_NS}/${PRODUCT_FETCH_LIST}`;
-export const PRODUCT_DISPATCH_RESET_FILTERS = `${PRODUCT_NS}/${PRODUCT_RESET_FILTERS}`;
-export const PRODUCT_DISPATCH_TOGGLE_FILTERS = `${PRODUCT_NS}/${PRODUCT_TOGGLE_FILTERS}`;
+export const PRODUCT_DO_DECREMENT = `${ PRODUCT_NS }/${ PRODUCT_KEY_DECREMENT }`;
+export const PRODUCT_DO_FETCH = `${ PRODUCT_NS }/${ PRODUCT_KEY_FETCH }`;
+export const PRODUCT_DO_INCREMENT = `${ PRODUCT_NS }/${ PRODUCT_KEY_INCREMENT }`;
+export const PRODUCT_DO_QUANTITY = `${ PRODUCT_NS }/${ PRODUCT_KEY_QUANTITY }`;
+export const PRODUCT_DO_RESET = `${ PRODUCT_NS }/${ PRODUCT_KEY_RESET }`;
+export const PRODUCT_DO_TOGGLE = `${ PRODUCT_NS }/${ PRODUCT_KEY_TOGGLE }`;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Getters (GET)
+
+export const PRODUCT_GET_FILTERS = `${ PRODUCT_NS }/${ PRODUCT_KEY_FILTERS }`;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Mutations (SET)
+
+export const PRODUCT_SET_FILTER_ALERT = `${ PRODUCT_NS }/${ PRODUCT_KEY_FILTER_ALERT }`;
+export const PRODUCT_SET_FILTER_NAME = `${ PRODUCT_NS }/${ PRODUCT_KEY_FILTER_NAME }`;
+export const PRODUCT_SET_FILTER_OS = `${ PRODUCT_NS }/${ PRODUCT_KEY_FILTER_OS }`;
+export const PRODUCT_SET_FILTER_TYPE = `${ PRODUCT_NS }/${ PRODUCT_KEY_FILTER_TYPE }`;
 

@@ -7,7 +7,7 @@
         <q-input class="q-my-xs stock-filter-input"
                  color="accent"
                  size="md"
-                 v-model="term"
+                 v-model="name"
                  outlined
                  square>
           <template v-slot:prepend>
@@ -16,8 +16,8 @@
           <template v-slot:append>
             <transition name="stock-filter-fade">
               <q-btn color="accent"
-                     v-show="term"
-                     @click.stop="term = ''"
+                     v-show="name"
+                     @click.stop="name = ''"
                      flat
                      round>
                 <q-icon class="cursor-pointer"

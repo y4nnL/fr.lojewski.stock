@@ -22,10 +22,22 @@ export default {
      */
     alert: {
       get() {
-        return this.$store.state.product.alert;
+        return this.$store.state[productConstants.PRODUCT_NS][productConstants.PRODUCT_KEY_FILTER_ALERT];
       },
       set(value) {
-        this.$store.commit(productConstants.PRODUCT_MUTATION_ALERT, value);
+        this.$store.commit(productConstants.PRODUCT_SET_FILTER_ALERT, value);
+      },
+    },
+    /**
+     * V-model of the store state "name" property
+     * @return {string}
+     */
+    name: {
+      get() {
+        return this.$store.state[productConstants.PRODUCT_NS][productConstants.PRODUCT_KEY_FILTER_NAME];
+      },
+      set(value) {
+        this.$store.commit(productConstants.PRODUCT_SET_FILTER_NAME, value);
       },
     },
     /**
@@ -34,22 +46,10 @@ export default {
      */
     os: {
       get() {
-        return this.$store.state.product.os;
+        return this.$store.state[productConstants.PRODUCT_NS][productConstants.PRODUCT_KEY_FILTER_OS];
       },
       set(value) {
-        this.$store.commit(productConstants.PRODUCT_MUTATION_OS, value);
-      },
-    },
-    /**
-     * V-model of the store state "term" property
-     * @return {string}
-     */
-    term: {
-      get() {
-        return this.$store.state.product.term;
-      },
-      set(value) {
-        this.$store.commit(productConstants.PRODUCT_MUTATION_TERM, value);
+        this.$store.commit(productConstants.PRODUCT_SET_FILTER_OS, value);
       },
     },
   },

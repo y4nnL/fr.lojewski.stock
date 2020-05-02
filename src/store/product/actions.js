@@ -1,69 +1,99 @@
-import {
-  PRODUCT_FETCH_LIST,
-  PRODUCT_TYPES,
-  PRODUCT_LIST,
-  PRODUCT_RESET_FILTERS,
-  PRODUCT_TERM,
-  PRODUCT_OS,
-  PRODUCT_ALERT,
-  PRODUCT_INCREMENT,
-  PRODUCT_DECREMENT,
-  PRODUCT_QUANTITY, PRODUCT_TOGGLE_FILTERS,
-  PRODUCT_SHOW_FILTERS
-} from 'src/store/product/constants';
-import { commitSaveProductUnit, productCollection } from 'src/store/product/helpers';
+import * as c from './constants';
+import * as h from './helpers';
 
 export default {
-  [PRODUCT_FETCH_LIST]: ({ commit }, payload) => {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Filters
+  /**
+   * Reset all the filters
+   * @param {function(string, *)} commit
+   */
+  [c.PRODUCT_KEY_RESET]({ commit }) {
+    commit(c.PRODUCT_KEY_FILTER_ALERT, false);
+    commit(c.PRODUCT_KEY_FILTER_NAME, '');
+    commit(c.PRODUCT_KEY_FILTER_OS, false);
+  },
+  /**
+   * Toggle the filter show state
+   * @param {function(string, *)} commit
+   */
+  [c.PRODUCT_KEY_TOGGLE]({ commit }) {
+    commit(c.PRODUCT_KEY_FILTER_SHOW, !this.state[c.PRODUCT_NS][c.PRODUCT_KEY_FILTER_SHOW]);
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // List
+  /**
+   * Fetch the product list from the Firestore server
+   * @param {function(string, *)} commit
+   */
+  [c.PRODUCT_KEY_FETCH]: ({ commit }) => {
     return new Promise((resolve, reject) => {
-      let collection = productCollection();
-      collection = collection.orderBy('name');
-      collection.get()
+      h.getProductCollection({ orderBy: 'name' })
+        .get()
         .then((querySnapshot) => {
           let products = [];
-          querySnapshot.forEach((doc) => {
-            products.push({ firestoreId: doc.id, ...doc.data() });
-          });
-          commit(PRODUCT_LIST, products);
+          querySnapshot.forEach((document) => products.push(h.createProductFromDocumentData(document)));
+          commit(c.PRODUCT_KEY_LIST, products);
           resolve();
         })
         .catch(reject);
     });
   },
-  [PRODUCT_INCREMENT]({ commit }, { productId, unitIndex }) {
-    return commitSaveProductUnit({
-      state: this.state.product,
-      doCommit: () => commit(PRODUCT_INCREMENT, { productId, unitIndex }),
-      undoCommit: () => commit(PRODUCT_DECREMENT, { productId, unitIndex }),
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Units
+  /**
+   * Decrement the given product unit and save it to the Firestore server
+   * @param {function(string, *)} commit
+   * @param {string} productId
+   * @param {number} productUnitIndex
+   * @returns {Promise<void>}
+   */
+  [c.PRODUCT_KEY_DECREMENT]({ commit }, { productId, productUnitIndex }) {
+    return h.commitAndSaveProductUnit({
+      commitDo: () => commit(c.PRODUCT_KEY_DECREMENT, { productId, productUnitIndex }),
+      commitUndo: () => commit(c.PRODUCT_KEY_INCREMENT, { productId, productUnitIndex }),
       productId,
-      unitIndex
+      productUnitIndex,
+      state: this.state[c.PRODUCT_NS],
     });
   },
-  [PRODUCT_DECREMENT]({ commit }, { productId, unitIndex }) {
-    return commitSaveProductUnit({
-      state: this.state.product,
-      doCommit: () => commit(PRODUCT_DECREMENT, { productId, unitIndex }),
-      undoCommit: () => commit(PRODUCT_INCREMENT, { productId, unitIndex }),
+  /**
+   * Increment the given product unit and save it to the Firestore server
+   * @param {function(string, *)} commit
+   * @param {string} productId
+   * @param {number} productUnitIndex
+   * @returns {Promise<void>}
+   */
+  [c.PRODUCT_KEY_INCREMENT]({ commit }, { productId, productUnitIndex }) {
+    return h.commitAndSaveProductUnit({
+      commitDo: () => commit(c.PRODUCT_KEY_INCREMENT, { productId, productUnitIndex }),
+      commitUndo: () => commit(c.PRODUCT_KEY_DECREMENT, { productId, productUnitIndex }),
       productId,
-      unitIndex
+      productUnitIndex,
+      state: this.state[c.PRODUCT_NS],
     });
   },
-  [PRODUCT_QUANTITY]({ commit }, { productId, unitIndex, quantity }) {
-    let undoQuantity = quantity;
-    return commitSaveProductUnit({
-      state: this.state.product,
-      doCommit: () => commit(PRODUCT_QUANTITY, { productId, unitIndex, quantity }),
-      undoCommit: () => commit(PRODUCT_QUANTITY, { productId, unitIndex, undoQuantity }),
-      productId,
-      unitIndex
-    });
+  /**
+   * Set the given product unit quantity and save it to the Firestore server
+   * @param {function(string, *)} commit
+   * @param {string} productId
+   * @param {number} productUnitIndex
+   * @param {number} productUnitQuantity
+   * @returns {Promise<void>}
+   */
+  [c.PRODUCT_KEY_QUANTITY]({ commit }, { productId, productUnitIndex, productUnitQuantity }) {
+    let { productUnit } = h.findProductUnitByIndex(this.state[c.PRODUCT_NS], productId, productUnitIndex);
+    if (productUnit) {
+      return h.commitAndSaveProductUnit({
+        commitDo: () => commit(c.PRODUCT_KEY_QUANTITY, { productId, productUnitIndex, productUnitQuantity }),
+        commitUndo: () => commit(c.PRODUCT_KEY_QUANTITY,
+          { productId, productUnitIndex, productUnitQuantity: productUnit.quantity }),
+        productId,
+        productUnitIndex,
+        state: this.state[c.PRODUCT_NS],
+      });
+    } else {
+      return Promise.reject();
+    }
   },
-  [PRODUCT_TOGGLE_FILTERS]({ commit }) {
-    commit(PRODUCT_SHOW_FILTERS, !this.state.product.showFilters);
-  },
-  [PRODUCT_RESET_FILTERS]({ commit }) {
-    commit(PRODUCT_TERM, '');
-    commit(PRODUCT_OS, '');
-    commit(PRODUCT_ALERT, '');
-  }
 };

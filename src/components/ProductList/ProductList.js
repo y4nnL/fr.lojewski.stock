@@ -65,17 +65,17 @@ export default {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   computed: {
     /**
-     * The store filtered product list
-     * @name filteredList
-     * @type {Array}
+     * The store product list
+     * @name list
+     * @type {Product[]}
      */
-    ...mapGetters(productConstants.PRODUCT_NS, [ productConstants.PRODUCT_FILTERED_LIST ]),
+    ...mapGetters(productConstants.PRODUCT_NS, [ productConstants.PRODUCT_KEY_LIST ]),
     /**
      * Whether the product list have active filters
      * @type {boolean}
      */
     hasFilters() {
-      return !!this.$store.getters[productConstants.PRODUCT_GETTER_FILTERS].length;
+      return this.$store.getters[productConstants.PRODUCT_GET_FILTERS].length > 0;
     },
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,50 +83,50 @@ export default {
     /**
      * Dispatch the decrement production unit action
      * @param {object} product
-     * @param {number} unitIndex
+     * @param {number} productUnitIndex
      */
-    decrement(product, { unitIndex }) {
-      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_DECREMENT, {
+    decrement(product, { productUnitIndex }) {
+      this.$store.dispatch(productConstants.PRODUCT_DO_DECREMENT, {
         productId: product.id,
-        unitIndex,
+        productUnitIndex,
       });
     },
     /**
      * Dispatch the increment production unit action
      * @param {object} product
-     * @param {number} unitIndex
+     * @param {number} productUnitIndex
      */
-    increment(product, { unitIndex }) {
-      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_INCREMENT, {
+    increment(product, { productUnitIndex }) {
+      this.$store.dispatch(productConstants.PRODUCT_DO_INCREMENT, {
         productId: product.id,
-        unitIndex,
+        productUnitIndex,
       });
     },
     /**
      * Dispatch the quantity production unit action
      * @param {object} product
-     * @param {number} unitIndex
-     * @param {number} quantity
+     * @param {number} productUnitIndex
+     * @param {number} productUnitQuantity
      */
-    quantity(product, { unitIndex, quantity }) {
-      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_QUANTITY, {
+    quantity(product, { productUnitIndex, productUnitQuantity }) {
+      this.$store.dispatch(productConstants.PRODUCT_DO_QUANTITY, {
         productId: product.id,
-        unitIndex,
-        quantity,
+        productUnitIndex,
+        productUnitQuantity,
       });
     },
     /**
      * Do fetch the product list
      */
     refresh(done) {
-      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_FETCH_LIST)
+      this.$store.dispatch(productConstants.PRODUCT_DO_FETCH)
         .finally(done);
     },
     /**
      * Rest all the product filters
      */
     resetFilters() {
-      this.$store.dispatch(productConstants.PRODUCT_DISPATCH_RESET_FILTERS);
+      this.$store.dispatch(productConstants.PRODUCT_DO_RESET);
     },
   },
 };

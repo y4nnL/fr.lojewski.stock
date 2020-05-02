@@ -2,12 +2,12 @@
 
   <transition name="product-list-fade"
               appear>
-    <template v-if="!fetching && filteredList.length">
+    <template v-if="!fetching && list.length">
       <q-pull-to-refresh :disable="ptrDisability"
                          @refresh="refresh">
         <div class="flex items-stretch q-col-gutter-md q-pa-md row">
           <div class="items-stretch col-lg-3 col-md-4 col-sm-6 col-xs-12"
-               v-for="product in filteredList"
+               v-for="product in list"
                :key="product.id">
             <product v-bind="product"
                      @increment="increment(product, $event)"
@@ -17,7 +17,7 @@
         </div>
       </q-pull-to-refresh>
     </template>
-    <template v-if="!fetching && !filteredList.length">
+    <template v-if="!fetching && !list.length">
       <div class="absolute-top full-width text-center q-pt-lg">
         <p>
           <img src="~assets/sad.svg"

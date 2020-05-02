@@ -1,48 +1,44 @@
-import {
-  PRODUCT_FILTERED_LIST, PRODUCT_FILTERS,
-  PRODUCT_TYPES
-} from './constants';
-
-let filterByType = (state) =>
-  (product) =>
-    state.keep.indexOf(product.id) > -1 ||
-    product.type === state.type;
-
-let filterByTerm = (state) =>
-  (product) =>
-    state.keep.indexOf(product.id) > -1 ||
-    product.name.toLowerCase().indexOf(state.term.toLowerCase()) > -1;
-
-let filterByAlert = (state) =>
-  (product) =>
-    state.keep.indexOf(product.id) > -1 ||
-    product.units.some((unit) => unit.quantity > 0 && unit.quantity <= unit.alert);
-
-let filterByOS = (state) =>
-  (product) =>
-    state.keep.indexOf(product.id) > -1 ||
-    product.units.some((unit) => !unit.quantity);
-
-let filterByAlertAndOS = (state) =>
-  (product) =>
-    state.keep.indexOf(product.id) > -1 ||
-    product.units.some((unit) => unit.quantity >= 0 && unit.quantity <= unit.alert);
+import * as c from './constants';
 
 export default {
-  [PRODUCT_FILTERED_LIST]: (state) => {
-    let filteredProducts = state.list;
-    if (state.type !== PRODUCT_TYPES.ALL) filteredProducts = filteredProducts.filter(filterByType(state));
-    if (state.term) filteredProducts = filteredProducts.filter(filterByTerm(state));
-    if (state.alert && !state.os) filteredProducts = filteredProducts.filter(filterByAlert(state));
-    if (state.os && !state.alert) filteredProducts = filteredProducts.filter(filterByOS(state));
-    if (state.alert && state.os) filteredProducts = filteredProducts.filter(filterByAlertAndOS(state));
-    return filteredProducts;
+  /**
+   * Return the list of active filters identified by their key
+   * @returns {Array<string>}
+   */
+  [c.PRODUCT_KEY_FILTERS]: (state) => {
+    return [ c.PRODUCT_KEY_FILTER_ALERT, c.PRODUCT_KEY_FILTER_NAME, c.PRODUCT_KEY_FILTER_OS ]
+      .filter(key => !!state[key]);
   },
-  [PRODUCT_FILTERS]: (state) => {
-    let list = [];
-    if (state.term) list.push('term');
-    if (state.alert) list.push('alert');
-    if (state.os) list.push('os');
-    return list;
-  }
-}
+  /**
+   * Return the list of filtered products
+   * @returns {Array<Product>}
+   */
+  [c.PRODUCT_KEY_LIST]: (state) => {
+    let list = /** @type {Array<{ keep: boolean, p: Product, }>} */
+      (state[c.PRODUCT_KEY_LIST].map(p => ({ keep: state[c.PRODUCT_KEY_FILTER_KEEP].indexOf(p.id) > -1, p })));
+
+    // Filter by type
+    if (state[c.PRODUCT_KEY_FILTER_TYPE] !== c.PRODUCT_TYPES.ALL) {
+      list = list.filter(({ keep, p }) => keep || p.type === state[c.PRODUCT_KEY_FILTER_TYPE]);
+    }
+    // Filter by name
+    if (state[c.PRODUCT_KEY_FILTER_NAME]) {
+      let name = state[c.PRODUCT_KEY_FILTER_NAME].toLowerCase();
+      list = list.filter(({ keep, p }) => keep || p.name.toLowerCase().indexOf(name) > -1);
+    }
+    // Filter by alert threshold only
+    if (state[c.PRODUCT_KEY_FILTER_ALERT] && !state[c.PRODUCT_KEY_FILTER_OS]) {
+      list = list.filter(({ keep, p }) => keep || p.units.some((u) => u.quantity > 0 && u.quantity <= u.alert));
+    }
+    // Filter by out of stock only
+    if (state[c.PRODUCT_KEY_FILTER_OS] && !state[c.PRODUCT_KEY_FILTER_ALERT]) {
+      list = list.filter(({ keep, p }) => keep || p.units.some((unit) => !unit.quantity));
+    }
+    // Filter by both alert threshold and out of stock
+    if (state[c.PRODUCT_KEY_FILTER_ALERT] && state[c.PRODUCT_KEY_FILTER_OS]) {
+      list = list.filter(({ keep, p }) => keep || p.units.some((u) => u.quantity >= 0 && u.quantity <= u.alert));
+    }
+
+    return list.map(({ p }) => p);
+  },
+};
