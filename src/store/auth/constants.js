@@ -9,17 +9,17 @@ export const AUTH_KEY_LOGIN = 'login';
 export const AUTH_KEY_LOGOUT = 'logout';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Actions
+// Actions (DO)
 
-export const AUTH_ACTION_LOGIN = `${ AUTH_NS }/${ AUTH_KEY_LOGIN }`;
-export const AUTH_ACTION_LOGOUT = `${ AUTH_NS }/${ AUTH_KEY_LOGOUT }`;
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Mutations
-
-export const AUTH_MUTATION_EMAIL = `${ AUTH_NS }/${ AUTH_KEY_EMAIL }`;
+export const AUTH_DO_LOGIN = `${ AUTH_NS }/${ AUTH_KEY_LOGIN }`;
+export const AUTH_DO_LOGOUT = `${ AUTH_NS }/${ AUTH_KEY_LOGOUT }`;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Getters
+// Getters (GET)
 
-export const AUTH_GETTER_IS_AUTHENTICATED = `${ AUTH_NS }/${ AUTH_KEY_IS_AUTHENTICATED }`;
+export const AUTH_GET_IS_AUTHENTICATED = `${ AUTH_NS }/${ AUTH_KEY_IS_AUTHENTICATED }`;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Mutations (SET)
+
+export const AUTH_SET_EMAIL = `${ AUTH_NS }/${ AUTH_KEY_EMAIL }`;

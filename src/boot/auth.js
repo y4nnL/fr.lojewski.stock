@@ -12,8 +12,8 @@ export default ({ store }) => {
     Firebase.auth()
       .onAuthStateChanged(
         (user) => {
-          if (user && !store.state[authConstants.AUTH_GETTER_IS_AUTHENTICATED]) {
-            store.commit(authConstants.AUTH_MUTATION_EMAIL, user.email);
+          if (user && !store.state[authConstants.AUTH_GET_IS_AUTHENTICATED]) {
+            store.commit(authConstants.AUTH_SET_EMAIL, user.email);
           }
           resolve();
         },

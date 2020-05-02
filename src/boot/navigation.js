@@ -1,5 +1,5 @@
 import * as routerConstants from 'src/router/constants';
-import { AUTH_GETTER_IS_AUTHENTICATED } from 'src/store/auth/constants';
+import { AUTH_GET_IS_AUTHENTICATED } from 'src/store/auth/constants';
 import { PRODUCT_SET_FILTER_TYPE } from 'src/store/product/constants';
 
 export default ({ store, router }) => {
@@ -9,7 +9,7 @@ export default ({ store, router }) => {
    */
   router.beforeEach((to, from, next) => {
     let auth = to.matched.some(route => route.meta[routerConstants.ROUTER_META_AUTH]);
-    let isAuthenticated = store.getters[AUTH_GETTER_IS_AUTHENTICATED];
+    let isAuthenticated = store.getters[AUTH_GET_IS_AUTHENTICATED];
     if (auth) {
       isAuthenticated ? next() : next({ name: routerConstants.ROUTER_NAME_AUTH });
     } else {

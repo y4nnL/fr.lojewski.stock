@@ -110,7 +110,7 @@ export default {
     logout() {
       this.disconnecting = true;
       setTimeout(() => {
-        this.$store.dispatch(authConstants.AUTH_ACTION_LOGOUT)
+        this.$store.dispatch(authConstants.AUTH_DO_LOGOUT)
           .then(() => this.$router.push({ name: routerConstants.ROUTER_NAME_AUTH }))
           .finally(() => this.disconnecting = false);
       }, 750);
