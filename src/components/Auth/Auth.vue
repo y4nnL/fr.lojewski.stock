@@ -17,8 +17,7 @@
                        type="email"
                        v-model="username"
                        :disable="isSubmitting"
-                       outlined
-                       square>
+                       outlined>
                 <template v-slot:prepend>
                   <q-icon name="person"/>
                 </template>
@@ -30,8 +29,7 @@
                        type="password"
                        v-model="password"
                        :disable="isSubmitting"
-                       outlined
-                       square>
+                       outlined>
                 <template v-slot:prepend>
                   <q-icon name="lock"/>
                 </template>

@@ -6,10 +6,9 @@
       <div>
         <q-input class="q-my-xs stock-filter-input"
                  color="accent"
-                 size="md"
                  v-model="name"
-                 outlined
-                 square>
+                 dense
+                 outlined>
           <template v-slot:prepend>
             <q-icon name="search"/>
           </template>

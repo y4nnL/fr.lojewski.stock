@@ -1,16 +1,16 @@
 <template>
 
   <q-card class="full-height">
-    <q-img class="product-img"
-           spinner-color="white"
-           transition="fade"
-           :placeholder-src="placeholderSrc"
-           :src="imagePath">
+    <storage-img class="product-img"
+                 spinner-color="white"
+                 transition="fade"
+                 :ratio="16/9"
+                 :src="id">
       <div class="absolute-bottom product-title text-h6">{{ name }}</div>
       <template v-slot:loading>
         <q-spinner-gears color="white"/>
       </template>
-    </q-img>
+    </storage-img>
     <q-card-actions>
       <product-unit class="q-pl-sm"
                     v-bind="unit"

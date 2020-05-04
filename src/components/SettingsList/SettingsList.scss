@@ -1,0 +1,65 @@
+.settings-list {
+  position: relative;
+  background: white;
+  height: 85vh;
+  overflow: hidden;
+}
+
+.settings-list-add {
+  transition: transform .3s ease-out;
+  transform: rotate(0deg);
+}
+
+.settings-list-add.settings-list-rotate {
+  transform: rotate(135deg);
+}
+
+.settings-list-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+}
+
+.settings-list-list,
+.settings-list-form {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  height: calc(100% - 50px);
+  overflow: auto;
+  transition: left .3s ease-out;
+}
+
+.settings-list-list.settings-list-in,
+.settings-list-form.settings-list-in {
+  left: 0;
+}
+
+.settings-list-list.settings-list-out {
+  left: -100%;
+}
+
+.settings-list-form.settings-list-out {
+  left: 100%;
+}
+
+.settings-list-item {
+  width: 100%;
+  height: 56px;
+  border-bottom: 1px solid #EEE;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Animations
+
+.settings-list-fade-enter-active,
+.settings-list-fade-leave-active {
+  transition: opacity .3s .1s;
+}
+
+.settings-list-fade-enter,
+.settings-list-fade-leave-to {
+  opacity: 0;
+}

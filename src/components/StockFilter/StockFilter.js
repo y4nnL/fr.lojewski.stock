@@ -54,7 +54,7 @@ export default {
     },
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  destroy() {
+  destroyed() {
     window.removeEventListener('orientationchangeend', this.emitHeight);
   },
   mounted() {

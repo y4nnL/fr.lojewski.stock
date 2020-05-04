@@ -19,7 +19,7 @@
           </q-badge>
         </q-btn>
         <q-btn icon="settings"
-               @click="settings = !settings"
+               :to="this.$route.fullPath + settingsPath"
                dense
                flat
                round>
@@ -63,10 +63,6 @@
         <router-view/>
       </q-page>
     </q-page-container>
-    <q-dialog position="bottom"
-              v-model="settings">
-      <settings/>
-    </q-dialog>
   </q-layout>
 
 </template>

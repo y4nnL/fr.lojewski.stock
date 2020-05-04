@@ -1,21 +1,13 @@
 import * as productConstants from 'src/store/product/constants';
 import ProductUnit from '../ProductUnit/ProductUnit.vue';
+import StorageImg from '../StorageImg/StorageImg.vue';
 
 export default {
   name: 'Product',
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   components: {
     ProductUnit,
-  },
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  data() {
-    return {
-      /**
-       * Product image placeholder as base64 data
-       * @type {string}
-       */
-      placeholderSrc: productConstants.PRODUCT_PLACEHOLDER_IMAGE,
-    };
+    StorageImg,
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   props: {
@@ -36,16 +28,6 @@ export default {
       default: () => [],
       required: true,
       type: Array,
-    },
-  },
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  computed: {
-    /**
-     * Path to the product image
-     * @returns {string}
-     */
-    imagePath() {
-      return '/statics/products/' + this.id + '.jpg';
     },
   },
 };

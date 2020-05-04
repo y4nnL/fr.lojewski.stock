@@ -1,4 +1,5 @@
 import * as productConstants from 'src/store/product/constants';
+import * as routerConstants from 'src/router/constants';
 import Product from '../Product/Product.vue';
 import { QSpinnerGears } from 'quasar';
 import { mapGetters } from 'vuex';
@@ -32,6 +33,11 @@ export default {
        * @type {number}
        */
       ptrInterval: 0,
+      /**
+       * Alias of the router settings path constant
+       * @type {string}
+       */
+      settingsPath: routerConstants.ROUTER_PATH_SETTINGS,
     };
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,18 +71,18 @@ export default {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   computed: {
     /**
-     * The store product list
-     * @name list
-     * @type {Product[]}
-     */
-    ...mapGetters(productConstants.PRODUCT_NS, [ productConstants.PRODUCT_KEY_LIST ]),
-    /**
      * Whether the product list have active filters
      * @type {boolean}
      */
     hasFilters() {
       return this.$store.getters[productConstants.PRODUCT_GET_FILTERS].length > 0;
     },
+    /**
+     * The store product list
+     * @name list
+     * @type {Product[]}
+     */
+    ...mapGetters(productConstants.PRODUCT_NS, [ productConstants.PRODUCT_KEY_LIST ]),
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   methods: {

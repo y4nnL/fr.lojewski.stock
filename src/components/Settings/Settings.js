@@ -1,17 +1,42 @@
 import * as productConstants from 'src/store/product/constants';
-import { mapState } from 'vuex';
+import * as routerConstants from 'src/router/constants';
+import SettingsList from '../SettingsList/SettingsList.vue';
 
 export default {
   name: 'Settings',
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   data() {
     return {
-      add: false,
-      right: false,
+      /**
+       * Dialog to open when a /settings route is triggered
+       * @type {QVueGlobals.dialog}
+       */
+      dialog: null,
     };
   },
-  computed: {
-    ...mapState(productConstants.PRODUCT_NS, {
-      [productConstants.PRODUCT_KEY_LIST]: (state) => state.list,
-    }),
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  destroyed() {
+    if (this.dialog) {
+      this.dialog.hide();
+    }
   },
+  mounted() {
+    if (!this.dialog) {
+      this.dialog = this.$q.dialog({
+        delay: 350,
+        component: SettingsList,
+        parent: this,
+      }).onDismiss(() => this.close());
+    }
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  methods: {
+    close() {
+      this.dialog = null;
+      let pathRe = new RegExp(routerConstants.ROUTER_PATH_SETTINGS + '(\\?new)?');
+      if (pathRe.test(this.$route.fullPath)) {
+        this.$router.push({ path: this.$route.fullPath.replace(pathRe, '') });
+      }
+    }
+  }
 };

@@ -16,6 +16,7 @@ const tabs = {
   [productConstants.PRODUCT_TYPES.CARBOHYDRATE]: 'Féculents',
   [productConstants.PRODUCT_TYPES.FRESH]: 'Frais',
   [productConstants.PRODUCT_TYPES.DRINK]: 'Boissons',
+  [productConstants.PRODUCT_TYPES.HOUSEHOLD]: 'Droguerie',
   [productConstants.PRODUCT_TYPES.OTHER]: 'Autres',
 };
 
@@ -50,10 +51,10 @@ export default {
        */
       headerHeightHint: 98,
       /**
-       * Whether show the setting backdrop
-       * @type {boolean}
+       * Alias of the router settings path constant
+       * @type {string}
        */
-      settings: false,
+      settingsPath: routerConstants.ROUTER_PATH_SETTINGS,
       /**
        * Alias of the router stock path constant
        * @type {string}

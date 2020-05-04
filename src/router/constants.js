@@ -9,6 +9,7 @@ export const ROUTER_META_AUTH = 'auth';
 // Paths
 
 export const ROUTER_PATH_AUTH = '/all';
+export const ROUTER_PATH_SETTINGS = '/settings';
 export const ROUTER_PATH_STOCK = '/stock';
 export const ROUTER_PATH_STOCK_ALL = '/stock/all';
 export const ROUTER_PATH_STOCK_TYPE = `/stock/:type(${Object.values(PRODUCT_TYPES).join('|')})`;
@@ -17,4 +18,5 @@ export const ROUTER_PATH_STOCK_TYPE = `/stock/:type(${Object.values(PRODUCT_TYPE
 // Names
 
 export const ROUTER_NAME_AUTH = 'all';
+export const ROUTER_NAME_SETTINGS = 'settings';
 export const ROUTER_NAME_STOCK = 'stock';

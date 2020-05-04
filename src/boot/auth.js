@@ -1,6 +1,8 @@
 import * as authConstants from 'src/store/auth/constants';
 import Firebase from 'firebase/app';
+import Vue from 'vue';
 import 'firebase/auth';
+import 'firebase/storage';
 
 /**
  * Try to silently get the user's email from the Firebase auth mechanism
@@ -13,6 +15,9 @@ export default ({ store }) => {
       .onAuthStateChanged(
         (user) => {
           if (user && !store.state[authConstants.AUTH_GET_IS_AUTHENTICATED]) {
+            let storage = Firebase.storage().ref(user.email);
+            store.$storageRef = Vue.prototype.$storageRef = storage;
+            Vue.prototype.$storageImg = (id) => storage.child(id + '.jpg').getDownloadURL();
             store.commit(authConstants.AUTH_SET_EMAIL, user.email);
           }
           resolve();
