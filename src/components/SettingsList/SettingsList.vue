@@ -3,7 +3,8 @@
   <q-dialog position="bottom"
             ref="dialog"
             @hide="onDialogHide">
-    <div class="settings-list">
+    <div class="settings-list"
+         ref="root">
       <div class="bg-spotted flex q-px-md q-py-sm settings-list-header text-subtitle2 text-white items-center">
         <span>{{ title }}</span>
         <q-space/>

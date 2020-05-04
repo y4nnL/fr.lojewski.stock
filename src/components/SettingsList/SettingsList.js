@@ -10,16 +10,6 @@ export default {
     StorageImg,
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  props: {
-    /**
-     * Delay the list display
-     */
-    delay: {
-      default: 0,
-      type: Number,
-    },
-  },
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   data() {
     let createMode = /\?new$/.test(this.$route.fullPath);
 
@@ -33,7 +23,7 @@ export default {
        * Whether the list is delayed
        * @type {boolean}
        */
-      delayed: this.delay > 0,
+      delayed: true,
       /**
        * Whether a product is being deleted
        * @type {string}
@@ -70,12 +60,22 @@ export default {
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /**
-   * Delay tho list display for performance reasons
+   * Delay the list display to the end of the dialog transition for performance reasons
    */
   mounted() {
-    if (this.delay) {
-      setTimeout(() => this.delayed = false, this.delay);
-    }
+    let top = -1;
+    let count = 0;
+    let interval = setInterval(() => {
+      if (this.$refs.root) {
+        let now = this.$refs.root.getBoundingClientRect().top;
+        if (now === top) count++;
+        if (count === 2) {
+          clearInterval(interval);
+          this.delayed = false;
+        }
+        top = now;
+      }
+    }, 75);
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   methods: {
@@ -98,6 +98,7 @@ export default {
      */
     edit(product) {
       this.$refs.form.reset();
+      this.product = null;
       // let v-ripple the time to take effect
       setTimeout(() => {
         this.form = true;

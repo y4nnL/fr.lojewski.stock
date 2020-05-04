@@ -23,7 +23,6 @@ export default {
   mounted() {
     if (!this.dialog) {
       this.dialog = this.$q.dialog({
-        delay: 350,
         component: SettingsList,
         parent: this,
       }).onDismiss(() => this.close());
