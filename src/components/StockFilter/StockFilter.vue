@@ -29,7 +29,7 @@
       <div>
         <q-toggle color="accent"
                   v-model="alert">
-          <span class="text-subtitle1">Proche de la rupture</span>
+          <span class="text-subtitle1">Sous le seuil d'alerte</span>
         </q-toggle>
         <q-toggle color="accent"
                   v-model="os">

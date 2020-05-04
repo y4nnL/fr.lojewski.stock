@@ -38,9 +38,9 @@
                  :ratio="16/9"
                  :src="modelImage.base64"
                  v-ripple>
-            <div class="absolute-bottom settings-form-img text-h6 flex justify-between">
-              <span>{{ modelName || '' }}</span>
-              <span style="font-size: 60%">Toucher pour changer l'image</span>
+            <div class="absolute-bottom settings-form-img">
+              <span class="text-h6">{{ modelName || '' }}</span><br>
+              <span>Toucher pour changer l'image</span>
             </div>
             <q-file class="absolute-full"
                     @input="onImageInput($event)"
@@ -57,9 +57,9 @@
                        :ratio="16/9"
                        :src="modelId"
                        v-ripple>
-            <div class="absolute-bottom settings-form-img text-h6 flex justify-between">
-              <span>{{ modelName || '' }}</span>
-              <span style="font-size: 60%">Toucher pour changer l'image</span>
+            <div class="absolute-bottom settings-form-img">
+              <span class="text-h6">{{ modelName || '' }}</span><br>
+              <span>Toucher pour changer l'image</span>
             </div>
             <q-file class="absolute-full"
                     @input="onImageInput($event)"
