@@ -76,7 +76,7 @@ export function commitAndSaveProductUnit({ commitDo, commitUndo, productId, prod
  */
 export function getProductCollection(options) {
   let collection = Firebase.firestore()
-    .collection(c.PRODUCT_FIRESTORE_COLLECTION);
+    .collection(c.PRODUCT_FIRESTORE_COLLECTION.value);
   if (options) {
     if (options.orderBy) {
       collection = collection.orderBy(options.orderBy);

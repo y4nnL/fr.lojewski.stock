@@ -7,7 +7,7 @@ export const PRODUCT_CONTROLS = {
   NUMBER: 'number',
   SLIDER: 'slider',
 };
-export const PRODUCT_FIRESTORE_COLLECTION = 'products';
+export const PRODUCT_FIRESTORE_COLLECTION = { value: '' };
 export const PRODUCT_FIRESTORE_ID = 'firestoreId';
 export const PRODUCT_PLACEHOLDER_IMAGE = [
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADIAQMAAABoEU4WAAAAA1BMVEVwh',
