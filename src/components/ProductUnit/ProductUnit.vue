@@ -2,7 +2,6 @@
 
   <div class="row full-width text-subtitle2">
     <div>
-      Il reste
       <q-chip>
         <q-avatar class="overflow-hidden"
                   size="md"
