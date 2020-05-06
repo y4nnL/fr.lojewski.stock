@@ -1,6 +1,6 @@
 {
   "name": "stock",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Manage food stock",
   "productName": "Stock",
   "cordovaId": "fr.lojewski.stock",
