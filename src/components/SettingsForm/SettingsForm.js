@@ -124,7 +124,7 @@ export default {
       unit.alert = Number(unit.alert);
       unit.control = unit.control.value;
       unit.increment = Number(unit.increment);
-      unit.many = unit.many || unit.one;
+      unit.many = this.unitNeedsMany(unit) ? unit.many : unit.one;
       unit.quantity = Number(unit.quantity);
       return unit;
     },

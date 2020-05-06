@@ -79,6 +79,7 @@
           <div class="col-3 content-center flex items-stretch justify-center relative-position row">
             <div class="absolute bg-spotted flex flex-center rounded-borders settings-form-unit-index">{{ index + 1 }}
             </div>
+            <!-- BUTTONS -->
             <q-btn class="text-primary"
                    icon="keyboard_arrow_up"
                    v-if="modelUnits.length > 1"
