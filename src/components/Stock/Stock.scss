@@ -7,7 +7,7 @@
 
 .stock-container {
   transition: top .3s ease-out;
-  bottom: 0;
+  bottom: 50px; // bottom navigation
   padding: 0 !important;
   overflow: auto;
 }

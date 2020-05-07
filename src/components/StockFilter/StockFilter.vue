@@ -1,7 +1,6 @@
 <template>
 
   <div ref="rootElement">
-    <div class="bg-calm q-px-md q-py-sm text-h6 text-white">Filtrer les produits</div>
     <div class="q-pt-md q-px-md">
       <div>
         <q-input class="q-my-xs stock-filter-input"

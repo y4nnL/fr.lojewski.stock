@@ -32,11 +32,6 @@ export default {
   data() {
     return {
       /**
-       * Disconnect button loading state
-       * @type {boolean}
-       */
-      disconnecting: false,
-      /**
        * Whether the state contains filters
        * @type {boolean}
        */
@@ -71,12 +66,6 @@ export default {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   computed: {
     /**
-     * The user's email
-     * @name email
-     * @type {string}
-     */
-    ...mapState(authConstants.AUTH_NS, { email: authConstants.AUTH_KEY_EMAIL }),
-    /**
      * Number of current store state active filters
      * @returns {number}
      */
@@ -106,17 +95,6 @@ export default {
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   methods: {
-    /**
-     * Trigger the logout store action
-     */
-    logout() {
-      this.disconnecting = true;
-      setTimeout(() => {
-        this.$store.dispatch(authConstants.AUTH_DO_LOGOUT)
-          .then(() => this.$router.push({ name: routerConstants.ROUTER_NAME_AUTH }))
-          .finally(() => this.disconnecting = false);
-      }, 750);
-    },
     /**
      * Toggle the filters component visibility by triggering the corresponding store action
      */

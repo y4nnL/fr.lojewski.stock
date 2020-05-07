@@ -1,8 +1,18 @@
 import * as routerConstants from 'src/router/constants';
+import Vue from 'vue';
 import { AUTH_GET_IS_AUTHENTICATED } from 'src/store/auth/constants';
 import { PRODUCT_SET_FILTER_TYPE } from 'src/store/product/constants';
 
 export default ({ store, router }) => {
+
+  /**
+   * Access to route paths into vue components
+   */
+  Object.keys(routerConstants).forEach(key => {
+    if (/PATH/.test(key)) {
+      Vue.prototype[key] = routerConstants[key];
+    }
+  });
 
   /**
    * Keep { meta: { [ROUTER_META_AUTH]: true }} routes protected by the auth mechanism
