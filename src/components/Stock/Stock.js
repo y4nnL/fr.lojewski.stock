@@ -14,6 +14,7 @@ const tabs = {
   [productConstants.PRODUCT_TYPES.FRUIT]: 'Fruits & Légumes',
   [productConstants.PRODUCT_TYPES.PROTEIN]: 'Protéines',
   [productConstants.PRODUCT_TYPES.CARBOHYDRATE]: 'Féculents',
+  [productConstants.PRODUCT_TYPES.SWEET]: 'Sucré',
   [productConstants.PRODUCT_TYPES.FRESH]: 'Frais',
   [productConstants.PRODUCT_TYPES.DRINK]: 'Boissons',
   [productConstants.PRODUCT_TYPES.HOUSEHOLD]: 'Droguerie',

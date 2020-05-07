@@ -11,6 +11,7 @@ let types = [
   { value: productConstants.PRODUCT_TYPES.FRUIT, label: 'Fruits & Légumes' },
   { value: productConstants.PRODUCT_TYPES.PROTEIN, label: 'Protéines' },
   { value: productConstants.PRODUCT_TYPES.CARBOHYDRATE, label: 'Féculents' },
+  { value: productConstants.PRODUCT_TYPES.SWEET, label: 'Sucré' },
   { value: productConstants.PRODUCT_TYPES.FRESH, label: 'Frais' },
   { value: productConstants.PRODUCT_TYPES.DRINK, label: 'Boissons' },
   { value: productConstants.PRODUCT_TYPES.HOUSEHOLD, label: 'Droguerie' },
