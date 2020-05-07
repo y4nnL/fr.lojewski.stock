@@ -120,11 +120,12 @@ export default {
      * @private
      */
     __unitClean(unit) {
+      let many = this.unitNeedsMany(unit) ? unit.many : unit.one;
       delete unit.__key;
       unit.alert = Number(unit.alert);
       unit.control = unit.control.value;
       unit.increment = Number(unit.increment);
-      unit.many = this.unitNeedsMany(unit) ? unit.many : unit.one;
+      unit.many = many;
       unit.quantity = Number(unit.quantity);
       return unit;
     },
