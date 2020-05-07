@@ -91,7 +91,7 @@ export default {
           let list = [];
           querySnapshot.forEach((document) => list.push(h.createProductFromDocumentData(document)));
           commit(c.PRODUCT_KEY_LIST, list);
-          resolve();
+          resolve(list);
         })
         .catch(reject);
     });

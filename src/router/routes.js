@@ -1,6 +1,7 @@
 import * as constants from './constants';
 import Account from 'src/components/Account/Account.vue';
 import Auth from 'src/components/Auth/Auth.vue';
+import Firebase from 'src/components/Firebase/Firebase.vue';
 import ProductList from 'src/components/ProductList/ProductList.vue';
 import Settings from 'src/components/Settings/Settings.vue';
 import Shopping from 'src/components/Shopping/Shopping.vue';
@@ -44,10 +45,20 @@ const routes = [
     path: constants.ROUTER_PATH_STOCK,
     redirect: constants.ROUTER_PATH_STOCK_ALL,
   },
-  {
-    path: '*',
-    redirect: constants.ROUTER_PATH_STOCK,
-  },
 ];
+
+if (process.env.NODE_ENV === 'development') {
+  routes.push({
+    component: Firebase,
+    meta: { [constants.ROUTER_META_AUTH]: true },
+    name: constants.ROUTER_NAME_FIREBASE,
+    path: constants.ROUTER_PATH_FIREBASE,
+  });
+}
+
+routes.push({
+  path: '*',
+  redirect: constants.ROUTER_PATH_STOCK,
+});
 
 export default routes;
