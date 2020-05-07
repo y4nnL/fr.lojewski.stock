@@ -3,7 +3,9 @@
   <div class="app"
        id="q-app">
     <q-layout view="hHh lpr fFf">
-      <router-view/>
+      <transition name="app-fade">
+        <router-view/>
+      </transition>
       <q-footer class="bg-white z-top"
                 v-if="isAuthenticated"
                 bordered>
