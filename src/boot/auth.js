@@ -1,7 +1,7 @@
 import * as authConstants from 'src/store/auth/constants';
-import * as productConstants from 'src/store/product/constants';
 import Firebase from 'firebase/app';
 import Vue from 'vue';
+import { setFireStoreNamespace } from 'boot/firebase';
 import 'firebase/auth';
 import 'firebase/storage';
 
@@ -19,7 +19,7 @@ export default ({ store }) => {
             let storage = Firebase.storage().ref(user.email);
             Vue.prototype.$storageImg = (id) => storage.child(id + '.jpg').getDownloadURL();
             store.$storageRef = Vue.prototype.$storageRef = storage;
-            productConstants.PRODUCT_FIRESTORE_COLLECTION.value = user.email;
+            setFireStoreNamespace(user.email);
             store.commit(authConstants.AUTH_SET_EMAIL, user.email);
           }
           resolve();

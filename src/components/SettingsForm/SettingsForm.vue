@@ -2,7 +2,6 @@
 
   <div class="q-pa-md"
        ref="root">
-
     <q-form @submit.prevent.stop="submit">
       <!-- NAME -->
       <q-input class="block q-mb-md settings-form-input"
@@ -15,10 +14,10 @@
       <!-- ID -->
       <q-input class="block q-my-md settings-form-input"
                color="accent"
-               disabled
                label="Identifiant"
                type="text"
                :value="id"
+               disabled
                outlined
                stack-label/>
       <!-- TYPE -->
@@ -44,7 +43,7 @@
             </div>
             <q-file class="absolute-full"
                     @input="onImageInput($event)"
-                    borderless />
+                    borderless/>
             <template v-slot:loading>
               <q-spinner-gears color="white"/>
             </template>
@@ -63,7 +62,7 @@
             </div>
             <q-file class="absolute-full"
                     @input="onImageInput($event)"
-                    borderless />
+                    borderless/>
             <template v-slot:loading>
               <q-spinner-gears color="white"/>
             </template>
@@ -75,7 +74,7 @@
                         tag="div">
         <div class="content-stretch flex q-my-md row q-pr-md q-py-md rounded-borders settings-form-unit"
              v-for="(modelUnit, index) in modelUnits"
-             :key="modelUnit.__key">
+             :key="modelUnit.id">
           <div class="col-3 content-center flex items-stretch justify-center relative-position row">
             <div class="absolute bg-spotted flex flex-center rounded-borders settings-form-unit-index">{{ index + 1 }}
             </div>
@@ -132,6 +131,7 @@
             <q-input class="bg-white block q-my-xs"
                      color="accent"
                      label="Incrémentation"
+                     min=".5"
                      step=".5"
                      type="number"
                      v-model="modelUnit.increment"
@@ -144,6 +144,7 @@
             <q-input class="bg-white block q-my-xs"
                      color="accent"
                      label="Seuil d'alerte"
+                     min="0"
                      step=".5"
                      type="number"
                      v-model="modelUnit.alert"
@@ -156,6 +157,7 @@
             <q-input class="bg-white block q-mt-xs"
                      color="accent"
                      label="Quantité"
+                     min="0"
                      step=".5"
                      type="number"
                      v-model="modelUnit.quantity"

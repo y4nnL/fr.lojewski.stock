@@ -7,8 +7,6 @@ export const PRODUCT_CONTROLS = {
   NUMBER: 'number',
   SLIDER: 'slider',
 };
-export const PRODUCT_FIRESTORE_COLLECTION = { value: '' };
-export const PRODUCT_FIRESTORE_ID = 'firestoreId';
 export const PRODUCT_PLACEHOLDER_IMAGE = [
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADIAQMAAABoEU4WAAAAA1BMVEVwh',
   'p6J5dQEAAAAHklEQVQYGe3BMQEAAADCIPunXghfYAAAAAAAAABwCB54AAEPpFPOAAAAAElFTkSuQmCC',
@@ -75,6 +73,7 @@ export const PRODUCT_SET_FILTER_TYPE = `${ PRODUCT_NS }/${ PRODUCT_KEY_FILTER_TY
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Errors
 
+export const PRODUCT_ERROR_DUPLICATE_UNIT_ID = 'PRODUCT_ERROR_DUPLICATE_UNIT_ID';
 export const PRODUCT_ERROR_FILE_MALFORMED = 'PRODUCT_ERROR_FILE_MALFORMED';
 export const PRODUCT_ERROR_FILE_NOT_SUPPORTED = 'PRODUCT_ERROR_FILE_NOT_SUPPORTED';
 export const PRODUCT_ERROR_ID_EXISTS = 'PRODUCT_ERROR_ID_EXISTS';

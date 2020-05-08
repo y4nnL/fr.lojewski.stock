@@ -74,10 +74,10 @@ export default {
    * Decrement the given product unit
    * @param {Object} state
    * @param {string} productId
-   * @param {number} productUnitIndex
+   * @param {string} productUnitId
    */
-  [c.PRODUCT_KEY_DECREMENT]: (state, { productId, productUnitIndex }) => {
-    let { product, productUnit } = h.findProductUnitByIndex(state, productId, productUnitIndex);
+  [c.PRODUCT_KEY_DECREMENT]: (state, { productId, productUnitId }) => {
+    let { product, productUnit } = h.findProductUnitById(state, productId, productUnitId);
     if (product && productUnit && productUnit.quantity - productUnit.increment >= 0) {
       productUnit.quantity -= productUnit.increment;
       if (state[c.PRODUCT_KEY_FILTER_KEEP].indexOf(product.id) < 0) {
@@ -89,10 +89,10 @@ export default {
    * Increment the given product unit
    * @param {Object} state
    * @param {string} productId
-   * @param {number} productUnitIndex
+   * @param {string} productUnitId
    */
-  [c.PRODUCT_KEY_INCREMENT]: (state, { productId, productUnitIndex }) => {
-    let { product, productUnit } = h.findProductUnitByIndex(state, productId, productUnitIndex);
+  [c.PRODUCT_KEY_INCREMENT]: (state, { productId, productUnitId }) => {
+    let { product, productUnit } = h.findProductUnitById(state, productId, productUnitId);
     if (product && productUnit) {
       productUnit.quantity += productUnit.increment;
       if (state[c.PRODUCT_KEY_FILTER_KEEP].indexOf(product.id) < 0) {
@@ -104,11 +104,11 @@ export default {
    * Set the given product unit quantity
    * @param {Object} state
    * @param {string} productId
-   * @param {number} productUnitIndex
+   * @param {string} productUnitId
    * @param {number} productUnitQuantity
    */
-  [c.PRODUCT_KEY_QUANTITY]: (state, { productId, productUnitIndex, productUnitQuantity }) => {
-    let { product, productUnit } = h.findProductUnitByIndex(state, productId, productUnitIndex);
+  [c.PRODUCT_KEY_QUANTITY]: (state, { productId, productUnitId, productUnitQuantity }) => {
+    let { product, productUnit } = h.findProductUnitById(state, productId, productUnitId);
     if (product && productUnit) {
       productUnit.quantity = productUnitQuantity;
       if (state[c.PRODUCT_KEY_FILTER_KEEP].indexOf(product.id) < 0) {

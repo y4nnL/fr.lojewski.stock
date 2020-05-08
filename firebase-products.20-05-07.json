@@ -1,587 +1,606 @@
 [
   {
-    "name": "Amandes",
-    "firestoreId": "p5zq1smNnIsjxzbHJuVs",
-    "type": "other",
     "id": "amande",
+    "name": "Amandes",
+    "type": "other",
     "units": [
       {
-        "one": "bocal",
+        "alert": 30,
         "control": "slider",
-        "quantity": 40,
+        "id": "1",
         "increment": 10,
         "many": "bocal",
-        "alert": 30
+        "one": "bocal",
+        "quantity": 40
       }
     ]
   },
   {
-    "type": "fruit",
     "id": "avocats",
+    "name": "Avocats",
+    "type": "fruit",
     "units": [
       {
+        "alert": 2,
+        "control": "number",
+        "id": "1",
         "increment": 1,
         "many": "avocats",
-        "alert": 2,
         "one": "avocat",
-        "quantity": 2,
-        "control": "number"
-      }
-    ],
-    "name": "Avocats",
-    "firestoreId": "K87dNc7Q7MFfLna41iwZ"
-  },
-  {
-    "id": "avoine",
-    "units": [
-      {
-        "one": "bocal moulu",
-        "control": "slider",
-        "quantity": 100,
-        "increment": 10,
-        "many": "bocal moulu",
-        "alert": 20
-      },
-      {
-        "alert": 20,
-        "many": "bocal 1",
-        "one": "bocal 1",
-        "control": "slider",
-        "quantity": 100,
-        "increment": 10
-      },
-      {
-        "increment": 10,
-        "alert": 20,
-        "many": "bocal 2",
-        "one": "bocal 2",
-        "quantity": 100,
-        "control": "slider"
-      },
-      {
-        "one": "bocal 3",
-        "quantity": 100,
-        "control": "slider",
-        "increment": 10,
-        "many": "bocal 3",
-        "alert": 20
-      },
-      {
-        "quantity": 100,
-        "control": "slider",
-        "increment": 10,
-        "many": "sachet 1kg",
-        "alert": 20,
-        "one": "sachet 1kg"
-      }
-    ],
-    "name": "Avoine",
-    "firestoreId": "NCuSTUsniPsvE7LVvkJD",
-    "type": "carbohydrate"
-  },
-  {
-    "type": "fruit",
-    "id": "banane",
-    "units": [
-      {
-        "quantity": 4,
-        "control": "number",
-        "increment": 1,
-        "alert": 5,
-        "many": "bananes",
-        "one": "banane"
-      }
-    ],
-    "name": "Bananes",
-    "firestoreId": "CvdTHzTEI1bt94VQvIPn"
-  },
-  {
-    "type": "fresh",
-    "id": "beurre-1-2-sel",
-    "units": [
-      {
-        "quantity": 0,
-        "control": "number",
-        "increment": 1,
-        "many": "plaquettes",
-        "alert": 1,
-        "one": "plaquette"
-      }
-    ],
-    "name": "Beurre demi sel"
-  },
-  {
-    "type": "carbohydrate",
-    "id": "biscottes",
-    "units": [
-      {
-        "increment": 1,
-        "many": "paquets",
-        "alert": 0,
-        "one": "paquet",
-        "quantity": 0,
-        "control": "number"
-      }
-    ],
-    "name": "Biscottes"
-  },
-  {
-    "name": "Boeuf haché ",
-    "type": "protein",
-    "id": "boeuf-hache",
-    "units": [
-      {
-        "increment": 1,
-        "alert": 2,
-        "many": "boeuf hachés ",
-        "one": "boeuf haché ",
-        "control": "number",
-        "quantity": 3
-      }
-    ]
-  },
-  {
-    "name": "Canard",
-    "type": "protein",
-    "id": "canard",
-    "units": [
-      {
-        "one": "magret ",
-        "quantity": 1,
-        "control": "number",
-        "increment": 1,
-        "many": "magrets",
-        "alert": 0
-      }
-    ]
-  },
-  {
-    "id": "chocolat-au-lait",
-    "units": [
-      {
-        "one": "plaquette",
-        "quantity": 0,
-        "control": "number",
-        "increment": 0.5,
-        "many": "plaquettes",
-        "alert": 1
-      }
-    ],
-    "name": "Chocolat au lait",
-    "firestoreId": "cjLoHBjYTZqiHm3EFcXa",
-    "type": "sweet"
-  },
-  {
-    "type": "sweet",
-    "id": "chocolat-noir",
-    "units": [
-      {
-        "increment": 0.5,
-        "many": "plaquette",
-        "alert": 1,
-        "one": "plaquette",
-        "control": "number",
-        "quantity": 0
-      }
-    ],
-    "name": "Chocolat noir"
-  },
-  {
-    "type": "fruit",
-    "id": "citrons",
-    "units": [
-      {
-        "one": "citron",
-        "quantity": 3,
-        "control": "number",
-        "increment": 1,
-        "many": "citrons",
-        "alert": 5
-      }
-    ],
-    "name": "Citrons",
-    "firestoreId": "5G1noPyEyefvQrN4wQZ9"
-  },
-  {
-    "type": "drink",
-    "id": "coca-zero",
-    "units": [
-      {
-        "increment": 1,
-        "many": "canettes",
-        "alert": 3,
-        "one": "canette",
-        "quantity": 8,
-        "control": "number"
-      }
-    ],
-    "name": "Coca zéro",
-    "firestoreId": "dqs5wnWaqah8rlYvK7AO"
-  },
-  {
-    "name": "Conserve de tomate",
-    "type": "other",
-    "units": [
-      {
-        "one": "Conserve",
-        "quantity": 0,
-        "control": "number",
-        "increment": 1,
-        "many": "Conserves ",
-        "alert": 1
-      }
-    ],
-    "id": "conserve-de-tomate"
-  },
-  {
-    "name": "Coulis de tomate",
-    "type": "other",
-    "id": "coulis-de-tomate",
-    "units": [
-      {
-        "increment": 1,
-        "alert": 1,
-        "many": "briques",
-        "one": "brique",
-        "control": "number",
-        "quantity": 1
-      }
-    ]
-  },
-  {
-    "type": "other",
-    "id": "croquettes-chiens",
-    "units": [
-      {
-        "increment": 20,
-        "alert": 10,
-        "many": "sac 15kg",
-        "one": "sac 15kg",
-        "quantity": 10,
-        "control": "slider"
-      }
-    ],
-    "name": "Croquettes chiens"
-  },
-  {
-    "name": "Crème fraîche liquide 12%",
-    "type": "fresh",
-    "id": "creme-fraiche-liquide-12",
-    "units": [
-      {
-        "quantity": 1,
-        "control": "number",
-        "increment": 1,
-        "alert": 1,
-        "many": "bouteilles",
-        "one": "bouteille"
-      }
-    ]
-  },
-  {
-    "name": "Dinde",
-    "firestoreId": "5bhr5l4RnM2gsioRmjHz",
-    "type": "protein",
-    "id": "dinde",
-    "units": [
-      {
-        "increment": 1,
-        "many": "pochons de 240g",
-        "alert": 3,
-        "one": "pochon de 240g",
-        "quantity": 3,
-        "control": "number"
-      }
-    ]
-  },
-  {
-    "name": "Farine de blé",
-    "firestoreId": "MpTVEUwFH91b4euR3TwO",
-    "type": "carbohydrate",
-    "id": "farine-de-ble",
-    "units": [
-      {
-        "control": "slider",
-        "quantity": 100,
-        "increment": 10,
-        "many": "bocal 1kg",
-        "alert": 30,
-        "one": "bocal 1kg"
-      },
-      {
-        "one": "bocal 500g",
-        "control": "slider",
-        "quantity": 0,
-        "increment": 10,
-        "alert": 30,
-        "many": "bocal 500g"
-      }
-    ]
-  },
-  {
-    "name": "Farine de sarazin",
-    "firestoreId": "oqeAdCrcpuX2j0GDLXFE",
-    "type": "carbohydrate",
-    "id": "farine-de-sarazin",
-    "units": [
-      {
-        "many": "bocal",
-        "alert": 30,
-        "one": "bocal",
-        "control": "slider",
-        "quantity": 70,
-        "increment": 10
-      }
-    ]
-  },
-  {
-    "type": "fruit",
-    "id": "fraises",
-    "units": [
-      {
-        "one": "barquette",
-        "control": "number",
-        "quantity": 0,
-        "increment": 1,
-        "alert": 1,
-        "many": "barquettes"
-      }
-    ],
-    "name": "Fraises",
-    "firestoreId": "JHX5cmARIo1fCW8xeHW3"
-  },
-  {
-    "name": "Herbes de provence",
-    "type": "other",
-    "units": [
-      {
-        "increment": 1,
-        "many": "Herbes de provence",
-        "alert": 0.5,
-        "one": "Herbe de provence",
-        "control": "number",
-        "quantity": 0
-      }
-    ],
-    "id": "herbes-de-provence"
-  },
-  {
-    "name": "Jambon blanc",
-    "type": "protein",
-    "id": "jambon-blanc",
-    "units": [
-      {
-        "control": "number",
-        "quantity": 4,
-        "increment": 1,
-        "many": "plaquettes",
-        "alert": 4,
-        "one": "plaquette"
-      }
-    ]
-  },
-  {
-    "id": "levure-chimique",
-    "units": [
-      {
-        "one": "sachet",
-        "control": "number",
-        "quantity": 0,
-        "increment": 1,
-        "many": "sachets",
-        "alert": 2
-      }
-    ],
-    "name": "Levure chimique",
-    "type": "other"
-  },
-  {
-    "type": "protein",
-    "id": "oeufs",
-    "units": [
-      {
-        "increment": 1,
-        "alert": 15,
-        "many": "oeufs",
-        "one": "oeuf",
-        "quantity": 32,
-        "control": "number"
-      }
-    ],
-    "name": "Oeufs",
-    "firestoreId": "d2d7swwRrQLLV0da2lhD"
-  },
-  {
-    "type": "fruit",
-    "units": [
-      {
-        "one": "orange",
-        "quantity": 0,
-        "control": "number",
-        "increment": 1,
-        "many": "oranges",
-        "alert": 5
-      }
-    ],
-    "id": "oranges",
-    "name": "Oranges",
-    "firestoreId": "5UxMqFHa84XvVXPOnkON"
-  },
-  {
-    "id": "pq",
-    "units": [
-      {
-        "one": "rouleau",
-        "control": "number",
-        "quantity": 6,
-        "increment": 1,
-        "many": "rouleaux",
-        "alert": 5
-      }
-    ],
-    "name": "PQ",
-    "firestoreId": "qYUezPFvTGAQndxgrbVE",
-    "type": "household"
-  },
-  {
-    "name": "Poulet",
-    "firestoreId": "E0QYpnAe3FPwKEyl3Dnj",
-    "type": "protein",
-    "id": "poulet",
-    "units": [
-      {
-        "increment": 1,
-        "alert": 2,
-        "many": "pochons de 240g",
-        "one": "pochon de 240g",
-        "quantity": 1,
-        "control": "number"
-      }
-    ]
-  },
-  {
-    "name": "Produit pour sol",
-    "firestoreId": "cdWMgytEisHOXh1Q7YYa",
-    "type": "household",
-    "id": "liquide-laver-le-sol",
-    "units": [
-      {
-        "one": "bouteille",
-        "quantity": 25,
-        "control": "slider",
-        "increment": 25,
-        "many": "bouteille",
-        "alert": 25
-      }
-    ]
-  },
-  {
-    "name": "Riz basmati",
-    "firestoreId": "werSeohmRKlW2O0gmKmd",
-    "type": "carbohydrate",
-    "id": "riz-basmati",
-    "units": [
-      {
-        "increment": 1,
-        "alert": 1,
-        "many": "paquets de 500g",
-        "one": "paquet de 500g",
-        "control": "number",
         "quantity": 2
       }
     ]
   },
   {
-    "name": "Saumon",
-    "firestoreId": "yMSOW133co2vRjhkRjwn",
-    "type": "protein",
-    "id": "saumon",
+    "id": "avoine",
+    "name": "Avoine",
+    "type": "carbohydrate",
     "units": [
       {
-        "one": "pavé de 100g",
-        "quantity": 2,
-        "control": "number",
-        "increment": 1,
-        "many": "pavés de 100g",
-        "alert": 2
+        "alert": 20,
+        "control": "slider",
+        "id": "1",
+        "increment": 10,
+        "many": "bocal moulu",
+        "one": "bocal moulu",
+        "quantity": 100
+      },
+      {
+        "alert": 20,
+        "control": "slider",
+        "id": "2",
+        "increment": 10,
+        "many": "bocal 1",
+        "one": "bocal 1",
+        "quantity": 100
+      },
+      {
+        "alert": 20,
+        "control": "slider",
+        "id": "3",
+        "increment": 10,
+        "many": "bocal 2",
+        "one": "bocal 2",
+        "quantity": 100
+      },
+      {
+        "alert": 20,
+        "control": "slider",
+        "id": "4",
+        "increment": 10,
+        "many": "bocal 3",
+        "one": "bocal 3",
+        "quantity": 100
+      },
+      {
+        "alert": 20,
+        "control": "slider",
+        "id": "5",
+        "increment": 10,
+        "many": "sachet 1kg",
+        "one": "sachet 1kg",
+        "quantity": 100
       }
     ]
   },
   {
-    "name": "Savon",
-    "firestoreId": "7pIIHh8TvbEd0wpiHGBT",
+    "id": "banane",
+    "name": "Bananes",
+    "type": "fruit",
+    "units": [
+      {
+        "alert": 5,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "bananes",
+        "one": "banane",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "beurre-1-2-sel",
+    "name": "Beurre demi sel",
+    "type": "fresh",
+    "units": [
+      {
+        "alert": 1,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "plaquettes",
+        "one": "plaquette",
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "id": "biscottes",
+    "name": "Biscottes",
+    "type": "carbohydrate",
+    "units": [
+      {
+        "alert": 0,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "paquets",
+        "one": "paquet",
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "id": "boeuf-hache",
+    "name": "Boeuf haché ",
+    "type": "protein",
+    "units": [
+      {
+        "alert": 2,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "boeuf hachés ",
+        "one": "boeuf haché ",
+        "quantity": 3
+      }
+    ]
+  },
+  {
+    "id": "canard",
+    "name": "Canard",
+    "type": "protein",
+    "units": [
+      {
+        "alert": 0,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "magrets",
+        "one": "magret ",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "chocolat-au-lait",
+    "name": "Chocolat au lait",
+    "type": "sweet",
+    "units": [
+      {
+        "alert": 1,
+        "control": "number",
+        "id": "1",
+        "increment": 0.5,
+        "many": "plaquettes",
+        "one": "plaquette",
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "id": "chocolat-noir",
+    "name": "Chocolat noir",
+    "type": "sweet",
+    "units": [
+      {
+        "alert": 1,
+        "control": "number",
+        "id": "1",
+        "increment": 0.5,
+        "many": "plaquette",
+        "one": "plaquette",
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "id": "citrons",
+    "name": "Citrons",
+    "type": "fruit",
+    "units": [
+      {
+        "alert": 5,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "citrons",
+        "one": "citron",
+        "quantity": 3
+      }
+    ]
+  },
+  {
+    "id": "coca-zero",
+    "name": "Coca zéro",
+    "type": "drink",
+    "units": [
+      {
+        "alert": 3,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "canettes",
+        "one": "canette",
+        "quantity": 8
+      }
+    ]
+  },
+  {
+    "id": "conserve-de-tomate",
+    "name": "Conserve de tomate",
+    "type": "other",
+    "units": [
+      {
+        "alert": 1,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "Conserves ",
+        "one": "Conserve",
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "id": "coulis-de-tomate",
+    "name": "Coulis de tomate",
+    "type": "other",
+    "units": [
+      {
+        "alert": 1,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "briques",
+        "one": "brique",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "croquettes-chiens",
+    "name": "Croquettes chiens",
+    "type": "other",
+    "units": [
+      {
+        "alert": 10,
+        "control": "slider",
+        "id": "1",
+        "increment": 20,
+        "many": "sac 15kg",
+        "one": "sac 15kg",
+        "quantity": 10
+      }
+    ]
+  },
+  {
+    "id": "creme-fraiche-liquide-12",
+    "name": "Crème fraîche liquide 12%",
+    "type": "fresh",
+    "units": [
+      {
+        "alert": 1,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "bouteilles",
+        "one": "bouteille",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "dinde",
+    "name": "Dinde",
+    "type": "protein",
+    "units": [
+      {
+        "alert": 3,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "pochons de 240g",
+        "one": "pochon de 240g",
+        "quantity": 3
+      }
+    ]
+  },
+  {
+    "id": "farine-de-ble",
+    "name": "Farine de blé",
+    "type": "carbohydrate",
+    "units": [
+      {
+        "alert": 30,
+        "control": "slider",
+        "id": "1",
+        "increment": 10,
+        "many": "bocal 1kg",
+        "one": "bocal 1kg",
+        "quantity": 100
+      },
+      {
+        "alert": 30,
+        "control": "slider",
+        "id": "2",
+        "increment": 10,
+        "many": "bocal 500g",
+        "one": "bocal 500g",
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "id": "farine-de-sarazin",
+    "name": "Farine de sarazin",
+    "type": "carbohydrate",
+    "units": [
+      {
+        "alert": 30,
+        "control": "slider",
+        "id": "1",
+        "increment": 10,
+        "many": "bocal",
+        "one": "bocal",
+        "quantity": 70
+      }
+    ]
+  },
+  {
+    "id": "fraises",
+    "name": "Fraises",
+    "type": "fruit",
+    "units": [
+      {
+        "alert": 1,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "barquettes",
+        "one": "barquette",
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "id": "herbes-de-provence",
+    "name": "Herbes de provence",
+    "type": "other",
+    "units": [
+      {
+        "alert": 0.5,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "Herbes de provence",
+        "one": "Herbe de provence",
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "id": "jambon-blanc",
+    "name": "Jambon blanc",
+    "type": "protein",
+    "units": [
+      {
+        "alert": 4,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "plaquettes",
+        "one": "plaquette",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "levure-chimique",
+    "name": "Levure chimique",
+    "type": "other",
+    "units": [
+      {
+        "alert": 2,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "sachets",
+        "one": "sachet",
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "id": "oeufs",
+    "name": "Oeufs",
+    "type": "protein",
+    "units": [
+      {
+        "alert": 15,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "oeufs",
+        "one": "oeuf",
+        "quantity": 32
+      }
+    ]
+  },
+  {
+    "id": "oranges",
+    "name": "Oranges",
+    "type": "fruit",
+    "units": [
+      {
+        "alert": 5,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "oranges",
+        "one": "orange",
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "id": "pq",
+    "name": "PQ",
     "type": "household",
     "units": [
       {
-        "one": "savon",
-        "quantity": 1,
+        "alert": 5,
         "control": "number",
+        "id": "1",
         "increment": 1,
-        "many": "savons",
-        "alert": 2
-      }
-    ],
-    "id": "savon"
-  },
-  {
-    "type": "sweet",
-    "id": "sucre-glace",
-    "units": [
-      {
-        "one": "sachet 500g",
-        "control": "slider",
-        "quantity": 10,
-        "increment": 10,
-        "alert": 20,
-        "many": "sachet 500g"
-      }
-    ],
-    "name": "Sucre glace"
-  },
-  {
-    "id": "vanille-liquide",
-    "units": [
-      {
-        "one": "flacon",
-        "control": "slider",
-        "quantity": 0,
-        "increment": 20,
-        "alert": 10,
-        "many": "flacon"
-      }
-    ],
-    "name": "Vanille liquide",
-    "type": "sweet"
-  },
-  {
-    "name": "Volvic",
-    "firestoreId": "6CquCI7qGWOkmIeWiB27",
-    "type": "drink",
-    "id": "volvic",
-    "units": [
-      {
-        "control": "number",
-        "quantity": 2,
-        "increment": 1,
-        "many": "bouteilles de 8L",
-        "alert": 1,
-        "one": "bouteille de 8L"
+        "many": "rouleaux",
+        "one": "rouleau",
+        "quantity": 6
       }
     ]
   },
   {
-    "name": "Yaourt nature",
-    "firestoreId": "4tHmd9Sz8Uhp0ooKOu0G",
-    "type": "fresh",
-    "id": "yaourt-nature",
+    "id": "poulet",
+    "name": "Poulet",
+    "type": "protein",
     "units": [
       {
-        "one": "pot",
+        "alert": 2,
         "control": "number",
-        "quantity": 1,
+        "id": "1",
         "increment": 1,
+        "many": "pochons de 240g",
+        "one": "pochon de 240g",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "liquide-laver-le-sol",
+    "name": "Produit pour sol",
+    "type": "household",
+    "units": [
+      {
+        "alert": 25,
+        "control": "slider",
+        "id": "1",
+        "increment": 25,
+        "many": "bouteille",
+        "one": "bouteille",
+        "quantity": 25
+      }
+    ]
+  },
+  {
+    "id": "riz-basmati",
+    "name": "Riz basmati",
+    "type": "carbohydrate",
+    "units": [
+      {
+        "alert": 1,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "paquets de 500g",
+        "one": "paquet de 500g",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "saumon",
+    "name": "Saumon",
+    "type": "protein",
+    "units": [
+      {
+        "alert": 2,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "pavés de 100g",
+        "one": "pavé de 100g",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "savon",
+    "name": "Savon",
+    "type": "household",
+    "units": [
+      {
+        "alert": 2,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "savons",
+        "one": "savon",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "sucre-glace",
+    "name": "Sucre glace",
+    "type": "sweet",
+    "units": [
+      {
+        "alert": 20,
+        "control": "slider",
+        "id": "1",
+        "increment": 10,
+        "many": "sachet 500g",
+        "one": "sachet 500g",
+        "quantity": 10
+      }
+    ]
+  },
+  {
+    "id": "vanille-liquide",
+    "name": "Vanille liquide",
+    "type": "sweet",
+    "units": [
+      {
+        "alert": 10,
+        "control": "slider",
+        "id": "1",
+        "increment": 20,
+        "many": "flacon",
+        "one": "flacon",
+        "quantity": 0
+      }
+    ]
+  },
+  {
+    "id": "volvic",
+    "name": "Volvic",
+    "type": "drink",
+    "units": [
+      {
+        "alert": 1,
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "bouteilles de 8L",
+        "one": "bouteille de 8L",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "yaourt-nature",
+    "name": "Yaourt nature",
+    "type": "fresh",
+    "units": [
+      {
         "alert": 4,
-        "many": "pots"
+        "control": "number",
+        "id": "1",
+        "increment": 1,
+        "many": "pots",
+        "one": "pot",
+        "quantity": 1
       }
     ]
   }

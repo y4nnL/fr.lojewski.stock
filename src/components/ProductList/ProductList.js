@@ -88,38 +88,28 @@ export default {
   methods: {
     /**
      * Dispatch the decrement production unit action
-     * @param {object} product
-     * @param {number} productUnitIndex
+     * @param {string} productId
+     * @param {string} productUnitId
      */
-    decrement(product, { productUnitIndex }) {
-      this.$store.dispatch(productConstants.PRODUCT_DO_DECREMENT, {
-        productId: product.id,
-        productUnitIndex,
-      });
+    decrement(productId, { productUnitId }) {
+      this.$store.dispatch(productConstants.PRODUCT_DO_DECREMENT, { productId, productUnitId });
     },
     /**
      * Dispatch the increment production unit action
-     * @param {object} product
-     * @param {number} productUnitIndex
+     * @param {string} productId
+     * @param {string} productUnitId
      */
-    increment(product, { productUnitIndex }) {
-      this.$store.dispatch(productConstants.PRODUCT_DO_INCREMENT, {
-        productId: product.id,
-        productUnitIndex,
-      });
+    increment(productId, { productUnitId }) {
+      this.$store.dispatch(productConstants.PRODUCT_DO_INCREMENT, { productId, productUnitId });
     },
     /**
      * Dispatch the quantity production unit action
-     * @param {object} product
-     * @param {number} productUnitIndex
+     * @param {string} productId
+     * @param {string} productUnitId
      * @param {number} productUnitQuantity
      */
-    quantity(product, { productUnitIndex, productUnitQuantity }) {
-      this.$store.dispatch(productConstants.PRODUCT_DO_QUANTITY, {
-        productId: product.id,
-        productUnitIndex,
-        productUnitQuantity,
-      });
+    quantity(productId, { productUnitId, productUnitQuantity }) {
+      this.$store.dispatch(productConstants.PRODUCT_DO_QUANTITY, { productId, productUnitId, productUnitQuantity });
     },
     /**
      * Do fetch the product list

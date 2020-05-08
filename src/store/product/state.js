@@ -5,7 +5,6 @@ import * as c from './constants';
 
 /**
  * @typedef {Object} Product
- * @property {string} firestoreId
  * @property {string} id
  * @property {string} name
  * @property {string} type
@@ -16,6 +15,7 @@ import * as c from './constants';
  * @typedef {Object} ProductUnit
  * @property {number} alert
  * @property {string} control
+ * @property {string} id
  * @property {number} increment
  * @property {string} many
  * @property {string} one

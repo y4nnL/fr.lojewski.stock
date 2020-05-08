@@ -4,6 +4,22 @@ import { QSpinnerGears } from 'quasar';
 import { kebabCase } from 'lodash';
 
 /**
+ * Generate a session unique id based
+ * @returns {string}
+ */
+let uid = (function () {
+  let map = {};
+  let gen = () => '' + Math.round(Math.random() * 100000000);
+  return () => {
+    let id;
+    do {
+      id = gen();
+    } while (map[id]);
+    return id;
+  };
+})();
+
+/**
  * Product type options
  * @type {{ value: string, label: string }[]}
  */
@@ -90,13 +106,11 @@ export default {
     product(product) {
       /** @type {Product} */
       product = product ? JSON.parse(JSON.stringify(this.product)) : null;
-
       this.modelId = product ? product.id : '';
       this.modelImage = null;
       this.modelName = product ? product.name : '';
       this.modelType = product ? this.types.find(t => t.value === product.type) : null;
       this.modelUnits = product ? product.units.map((unit) => {
-        unit.__key = '' + Math.random();
         unit.control = /** @type {string} */ controls.find(u => u.value === unit.control);
         return unit;
       }) : [ this.__unitInstance() ];
@@ -122,7 +136,6 @@ export default {
      */
     __unitClean(unit) {
       let many = this.unitNeedsMany(unit) ? unit.many : unit.one;
-      delete unit.__key;
       unit.alert = Number(unit.alert);
       unit.control = unit.control.value;
       unit.increment = Number(unit.increment);
@@ -136,15 +149,15 @@ export default {
      * @private
      */
     __unitInstance() {
-      return {
-        __key: '' + Math.random(),
-        alert: 0,
-        control: /** @type {string} */ JSON.parse(JSON.stringify(controls[0])),
-        increment: 0,
+      return /** @type {ProductUnit} */({
+        alert: 1,
+        control: /** @type {string} */(JSON.parse(JSON.stringify(controls[0]))),
+        id: uid(),
+        increment: 1,
         many: '',
         one: '',
-        quantity: 0,
-      };
+        quantity: 1,
+      });
     },
     /**
      * Display a preview of the chosen product image anytime it changes

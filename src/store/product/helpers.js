@@ -1,4 +1,5 @@
 import * as c from './constants';
+import * as firebaseBoot from 'boot/firebase';
 import Firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -19,18 +20,15 @@ export function findProductById(state, productId) {
  * Find the product unit given its index from the product list
  * @param {Object} state The local product state
  * @param {string} productId
- * @param {number} productUnitIndex
+ * @param {string} productUnitId
  * @returns {{ product: Product, productUnit: ProductUnit }}
  */
-export function findProductUnitByIndex(state, productId, productUnitIndex) {
+export function findProductUnitById(state, productId, productUnitId) {
   /** @type {Product} */
   let product = findProductById(state, productId);
   /** @type {ProductUnit} */
-  let productUnit = product ? (product.units || [])[productUnitIndex] : null;
-  return {
-    product,
-    productUnit,
-  };
+  let productUnit = product ? (product.units || []).find(u => u.id === productUnitId) : null;
+  return { product, productUnit };
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,10 +40,7 @@ export function findProductUnitByIndex(state, productId, productUnitIndex) {
  * @returns {Product}
  */
 export function createProductFromDocumentData(document) {
-  return /** @type {Product} */({
-    [c.PRODUCT_FIRESTORE_ID]: document.id,
-    ...document.data(),
-  });
+  return /** @type {Product} */(document.data());
 }
 
 /**
@@ -54,11 +49,11 @@ export function createProductFromDocumentData(document) {
  * @param {function} commitDo
  * @param {function} commitUndo
  * @param {string} productId
- * @param {number} productUnitIndex
+ * @param {string} productUnitId
  * @returns {Promise<void>}
  */
-export function commitAndSaveProductUnit({ commitDo, commitUndo, productId, productUnitIndex, state }) {
-  let { product, productUnit } = findProductUnitByIndex(state, productId, productUnitIndex);
+export function commitAndSaveProductUnit({ commitDo, commitUndo, productId, productUnitId, state }) {
+  let { product, productUnit } = findProductUnitById(state, productId, productUnitId);
   if (product && productUnit) {
     commitDo();
     return saveProduct(product)
@@ -72,12 +67,16 @@ export function commitAndSaveProductUnit({ commitDo, commitUndo, productId, prod
  * Return the Firestore product collection
  * @param {Object?} options
  * @param {string} options.orderBy
+ * @param {Array} options.where
  * @returns {firebase.firestore.CollectionReference<firebase.firestore.DocumentData>}
  */
 export function getProductCollection(options) {
   let collection = Firebase.firestore()
-    .collection(c.PRODUCT_FIRESTORE_COLLECTION.value);
+    .collection(firebaseBoot.getFireStoreCollection(firebaseBoot.FIRESTORE_COLLECTION_PRODUCTS));
   if (options) {
+    if (options.where) {
+      collection = collection.where(...options.where);
+    }
     if (options.orderBy) {
       collection = collection.orderBy(options.orderBy);
     }
@@ -91,9 +90,13 @@ export function getProductCollection(options) {
  * @returns {Promise<void>}
  */
 export function saveProduct(product) {
-  return getProductCollection()
-    .doc(product[c.PRODUCT_FIRESTORE_ID])
-    .set(product, { merge: true });
+  return getProductCollection({ where: [ 'id', '==', product.id ] })
+    .get()
+    .then(querySnapshot => {
+      return getProductCollection()
+        .doc(querySnapshot.docs[0].id)
+        .set(product, { merge: true });
+    });
 }
 
 /**
@@ -110,7 +113,7 @@ export function validateProduct(state, payload, mode) {
   if (!payload.product.id) {
     errors.push({ error: c.PRODUCT_ERROR_MISSING_ID });
   }
-  if (mode === 'create' && state[c.PRODUCT_KEY_LIST].find(p => p.id === payload.product.id)) {
+  if (mode === 'create' && foundProduct) {
     errors.push({ error: c.PRODUCT_ERROR_ID_EXISTS });
   }
   if (mode === 'update' && !foundProduct) {
@@ -133,6 +136,9 @@ export function validateProduct(state, payload, mode) {
   }
   for (let unitIndex = 0, l = payload.product.units.length; unitIndex < l; unitIndex++) {
     let unit = payload.product.units[unitIndex];
+    if (payload.product.units.find(u => u.id === unit.id) !== unit) {
+      errors.push({ error: c.PRODUCT_ERROR_DUPLICATE_UNIT_ID, unitIndex });
+    }
     if (Object.values(c.PRODUCT_CONTROLS).indexOf(unit.control) < 0) {
       errors.push({ error: c.PRODUCT_ERROR_TYPE_UNKNOWN, unitIndex });
     }

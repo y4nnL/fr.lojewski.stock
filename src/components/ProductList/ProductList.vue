@@ -11,9 +11,9 @@
                  v-for="product in list"
                  :key="product.id">
               <product v-bind="product"
-                       @increment="increment(product, $event)"
-                       @decrement="decrement(product, $event)"
-                       @quantity="quantity(product, $event)"/>
+                       @increment="increment(product.id, $event)"
+                       @decrement="decrement(product.id, $event)"
+                       @quantity="quantity(product.id, $event)"/>
             </div>
           </div>
         </q-pull-to-refresh>
