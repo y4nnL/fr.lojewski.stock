@@ -22,6 +22,11 @@ export default {
        */
       data: null,
       /**
+       * Data from json textarea
+       * @type {string}
+       */
+      json: '',
+      /**
        * Whether is uploading
        * @type {boolean}
        */
@@ -90,6 +95,18 @@ export default {
             this.$refs.uploadName.errorMessage = e;
           })
           .finally(() => this.uploading = false);
+      }
+    },
+    validateJson(value) {
+      if (!value) {
+        return true;
+      }
+      try {
+        let json = JSON.parse(value);
+        this.data = json;
+        return true;
+      } catch (e) {
+        return 'JSON malformed';
       }
     },
   },

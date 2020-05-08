@@ -4,6 +4,7 @@
     <q-form class="q-mb-xl"
             :disabled="fetching || uploading"
             @submit.stop="fetch">
+      Fetch from
       <q-input class="q-mb-md"
                label="Fetch from"
                ref="fetchName"
@@ -26,6 +27,13 @@
                flat>({{ data.length }}) items
         </q-btn>
       </div>
+      <q-separator class="q-my-lg"/>
+      Or past json
+      <q-input ref="json"
+               type="textarea"
+               v-model="json"
+               :rules="[ validateJson ]"
+               outlined/>
     </q-form>
     <q-form v-show="data && data.length"
             ref="uploadForm"
