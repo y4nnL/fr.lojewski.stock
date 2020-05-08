@@ -1,5 +1,5 @@
 import * as c from './constants';
-import * as h from './helpers';
+import * as h from '../helpers';
 
 export default {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,24 +30,14 @@ export default {
    * @param {{ product: Product, file: File }} payload
    */
   [c.PRODUCT_KEY_CREATE]({ state, commit, dispatch }, payload) {
-    let errors = h.validateProduct(state, payload, 'create');
-    if (errors.length) {
-      return Promise.reject(errors);
-    } else {
-      return h.getProductCollection({ where: ['id', '==', payload.product.id] })
-        .get()
-        .then((querySnapshot) => {
-          if (querySnapshot.size === 0) {
-            return h.getProductCollection()
-              .doc()
-              .set(payload.product)
-              .then(() => this.$storageRef.child(payload.product.id + '.jpg').put(payload.file))
-              .then(() => dispatch(c.PRODUCT_KEY_FETCH));
-          } else {
-            return Promise.reject([ { error: c.PRODUCT_ERROR_ID_EXISTS } ]);
-          }
-        });
-    }
+    return h.validateProduct(state, payload, 'create')
+      .then(() => {
+        return h.getProductCollection()
+          .doc(payload.product.id)
+          .set(payload.product)
+          .then(() => this.$storageRef.child(payload.product.id + '.jpg').put(payload.file))
+          .then(() => dispatch(c.PRODUCT_KEY_FETCH));
+      });
   },
   /**
    * Delete the given product id
@@ -59,7 +49,7 @@ export default {
   [c.PRODUCT_KEY_DELETE]({ state, commit, dispatch }, { productId }) {
     let product = h.findProductById(state, productId);
     if (product) {
-      return h.getProductCollection({ where: ['id', '==', product.id] })
+      return h.getProductCollection({ where: [ 'id', '==', product.id ] })
         .get()
         .then((querySnapshot) => h.getProductCollection().doc(querySnapshot.docs[0].id).delete())
         .then(() => this.$storageRef.child(product.id + '.jpg').delete())
@@ -90,27 +80,20 @@ export default {
    * @param {{ product: Product, file: File }} payload
    */
   [c.PRODUCT_KEY_UPDATE]({ state, commit, dispatch }, payload) {
-    let errors = h.validateProduct(state, payload, 'update');
-    let foundProduct = h.findProductById(state, payload.product.id);
-    if (errors.length) {
-      return Promise.reject(errors);
-    } else {
-      return h.getProductCollection({ where: ['id', '==', foundProduct.id] })
-        .get()
-        .then((querySnapshot) => {
-          return h.getProductCollection()
-            .doc(querySnapshot.docs[0].id)
-            .set(payload.product, { merge: true })
-            .then(() => {
-              if (payload.file) {
-                let ref = this.$storageRef.child(payload.product.id + '.jpg');
-                return ref.delete()
-                  .then(() => ref.put(payload.file))
-              }
-            })
-            .then(() => dispatch(c.PRODUCT_KEY_FETCH));
+    return h.validateProduct(state, payload, 'update')
+      .then(() => {
+        return h.getProductCollection()
+          .doc(payload.product.id)
+          .set(payload.product, { merge: true })
+          .then(() => {
+            if (payload.file) {
+              let ref = this.$storageRef.child(payload.product.id + '.jpg');
+              return ref.delete()
+                .then(() => ref.put(payload.file));
+            }
+          })
+          .then(() => dispatch(c.PRODUCT_KEY_FETCH));
       });
-    }
   },
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Units

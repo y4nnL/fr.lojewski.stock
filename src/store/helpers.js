@@ -1,4 +1,4 @@
-import * as c from './constants';
+import * as c from './product/constants';
 import * as firebaseBoot from 'boot/firebase';
 import Firebase from 'firebase';
 import 'firebase/firestore';
@@ -90,13 +90,9 @@ export function getProductCollection(options) {
  * @returns {Promise<void>}
  */
 export function saveProduct(product) {
-  return getProductCollection({ where: [ 'id', '==', product.id ] })
-    .get()
-    .then(querySnapshot => {
-      return getProductCollection()
-        .doc(querySnapshot.docs[0].id)
-        .set(product, { merge: true });
-    });
+  return getProductCollection()
+    .doc(product.id)
+    .set(product, { merge: true });
 }
 
 /**
@@ -104,7 +100,7 @@ export function saveProduct(product) {
  * @param {Object} state The local product state
  * @param {{ product: Product, file: File }} payload
  * @param {string} mode
- * @returns {Array<{ error: string, unitIndex?: number }>}
+ * @returns {Promise<DocumentSnapshot<DocumentData>|{ error: string, unitId?: number }>}
  */
 export function validateProduct(state, payload, mode) {
   let errors = [];
@@ -136,29 +132,30 @@ export function validateProduct(state, payload, mode) {
   }
   for (let unitIndex = 0, l = payload.product.units.length; unitIndex < l; unitIndex++) {
     let unit = payload.product.units[unitIndex];
+    let unitId = unit.id;
     if (payload.product.units.find(u => u.id === unit.id) !== unit) {
-      errors.push({ error: c.PRODUCT_ERROR_DUPLICATE_UNIT_ID, unitIndex });
+      errors.push({ error: c.PRODUCT_ERROR_DUPLICATE_UNIT_ID, unitId });
     }
     if (Object.values(c.PRODUCT_CONTROLS).indexOf(unit.control) < 0) {
-      errors.push({ error: c.PRODUCT_ERROR_TYPE_UNKNOWN, unitIndex });
+      errors.push({ error: c.PRODUCT_ERROR_TYPE_UNKNOWN, unitId });
     }
     if (!unit.one) {
-      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_ONE, unitIndex });
+      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_ONE, unitId });
     }
     if (!unit.many) {
-      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_MANY, unitIndex });
+      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_MANY, unitId });
     }
     if (!unit.increment) {
-      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_INCREMENT, unitIndex });
+      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_INCREMENT, unitId });
     }
     if (typeof unit.increment !== 'number') {
-      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_INCREMENT_MALFORMED, unitIndex });
+      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_INCREMENT_MALFORMED, unitId });
     }
     if (typeof unit.alert !== 'number') {
-      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_ALERT_MALFORMED, unitIndex });
+      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_ALERT_MALFORMED, unitId });
     }
     if (typeof unit.quantity !== 'number') {
-      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_QUANTITY_MALFORMED, unitIndex });
+      errors.push({ error: c.PRODUCT_ERROR_MISSING_UNIT_QUANTITY_MALFORMED, unitId });
     }
     if (!payload.file && mode === 'create') {
       errors.push({ error: c.PRODUCT_ERROR_MISSING_FILE });
@@ -171,5 +168,22 @@ export function validateProduct(state, payload, mode) {
     }
   }
 
-  return errors;
+  if (errors.length) {
+    return Promise.reject(errors);
+  } else {
+    return new Promise((resolve, reject) => {
+      return getProductCollection()
+        .doc(payload.product.id)
+        .get()
+        .then((doc) => {
+          if (mode === 'create' && doc.exists) {
+            errors.push({ error: c.PRODUCT_ERROR_ID_EXISTS });
+          }
+          if (mode === 'update' && !doc.exists) {
+            errors.push({ error: c.PRODUCT_ERROR_ID_UNKNOWN });
+          }
+          errors.length ? reject(errors) : resolve(doc);
+        });
+    });
+  }
 }

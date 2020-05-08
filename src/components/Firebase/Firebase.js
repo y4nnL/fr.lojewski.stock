@@ -1,4 +1,4 @@
-import * as h from 'src/store/product/helpers';
+import * as h from 'src/store/helpers';
 import * as c from 'src/store/product/constants';
 
 export default {
@@ -77,10 +77,10 @@ export default {
         this.uploadingData = JSON.parse(JSON.stringify(this.data));
         let set = () => {
           let doc = this.uploadingData.shift();
-          if (doc) {
+          if (doc && doc.id) {
             return this.$firebase.firestore()
               .collection(this.uploadName)
-              .doc()
+              .doc(doc.id)
               .set(doc)
               .then(set)
           } else {
